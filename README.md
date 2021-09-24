@@ -12,4 +12,3 @@ Gustavo Azevedo Corrêa | 11257693 | <a href="https://gitlab.com/guazco">@guazco
 - [Experimento 1](./experimento1)
 - [Experimento 2](./experimento2)
 - [Experimento 3](./experimento3)
-)
