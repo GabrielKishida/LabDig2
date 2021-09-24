@@ -24,14 +24,16 @@ entity rx_serial_tick_uc is
         sinal           : in  std_logic;
         tick            : in  std_logic;
         half_tick       : in  std_logic;
-        fim             : in  std_logic;
+        fim_sinal       : in  std_logic;
         paridade        : in  std_logic;
+        recebe_dado     : in  std_logic;
         zera            : out std_logic;
         conta           : out std_logic;
         carrega         : out std_logic;
         pronto          : out std_logic;
+        tem_dado        : out std_logic;
         erro_paridade   : out std_logic;
-		db_estado       : out std_logic_vector (2 downto 0)
+		db_estado       : out std_logic_vector (3 downto 0)
     );
 end entity;
 
@@ -43,8 +45,9 @@ architecture rx_serial_tick_uc_arch of rx_serial_tick_uc is
         inicio_amostra,
         espera_amostra,
         amostra,
+        checa_fim,
         checa_paridade,
-        pronto,
+        sucesso,
         erro
     );
 
@@ -64,10 +67,10 @@ begin
     end process;
 
   -- logica de proximo estado
-    process (sinal, tick, half_tick, paridade, fim, Eatual) 
+    process (sinal, tick, half_tick, paridade, fim_sinal, Eatual) 
     begin
       case Eatual is
-        when inicial        =>  Eprox <= espera;
+        when inicial =>         Eprox <= espera;
 
         when espera =>          if sinal='0' then  Eprox <= inicio_amostra;
                                 else Eprox <= espera;
@@ -77,19 +80,23 @@ begin
                                 else Eprox <= inicio_amostra;
                                 end if;
         
-        when amostra =>         if fim='1' then Eprox <= checa_paridade;
-                                else Eprox <= espera_amostra;
-                                end if;
+        when amostra =>         Eprox <= checa_fim;
         
         when espera_amostra =>  if tick='1' then Eprox <= amostra;
                                 else Eprox <= espera_amostra;
                                 end if;
+
+        when checa_fim =>       if fim_sinal='1' then Eprox <= checa_paridade;
+                                else Eprox <= espera_amostra;
+                                end if;
                                    
-        when checa_paridade =>  if paridade='1' then Eprox <= pronto;
+        when checa_paridade =>  if paridade='1' then Eprox <= sucesso;
                                 else Eprox <= erro;
                                 end if;
 
-        when pronto =>          Eprox <= espera;
+        when sucesso =>         if recebe_dado='1' then Eprox <= espera;
+                                else Eprox <= sucesso;
+                                end if;
 
         when erro =>            Eprox <= espera;
 
@@ -102,16 +109,19 @@ begin
         carrega <= '1' when amostra, '0' when others;
 
     with Eatual select
-        zera <= '1' when amostra or espera, '0' when others;
+        zera <= '1' when amostra | espera, '0' when others;
 
     with Eatual select
-        conta <= '1' when inicio_amostra or espera_amostra, '0' when others;
+        conta <= '1' when inicio_amostra | espera_amostra, '0' when others;
 
     with Eatual select
-        pronto <= '1' when pronto or erro, '0' when others;
+        pronto <= '1' when sucesso | erro, '0' when others;
 
     with Eatual select
-        erro_paridade <= '1' when pronto or erro, '0' when others;
+        erro_paridade <= '1' when sucesso | erro, '0' when others;
+
+    with Eatual select
+        tem_dado <= '1' when sucesso, '0' when others;
     
 	 with Eatual select
 			db_estado <=    "0001" when inicial,
@@ -120,7 +130,7 @@ begin
 							"0100" when espera_amostra,
 							"0101" when amostra,
                             "0110" when checa_paridade,
-                            "0111" when pronto,
+                            "0111" when sucesso,
                             "1000" when erro,
 							"0000" when others;
 
