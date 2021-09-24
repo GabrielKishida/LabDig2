@@ -4,14 +4,13 @@
 ------------------------------------------------------------------
 -- Descricao : circuito da experiencia 2 
 --             > unidade de controle para o circuito
---             > de transmissao serial assincrona
---             > 
+--             > de recepcao serial assincrona
 --             > usa a tecnica de superamostragem com o uso
---             > de sinal de tick para transmissao de dados
+--             > de sinal de tick para recepcao de dados
 ------------------------------------------------------------------
 -- Revisoes  :
 --     Data        Versao  Autor             Descricao
---     09/09/2021  1.0     Edson Midorikawa  versao inicial
+--     24/09/2021  1.0     Gabriel Kishida   versao inicial
 ------------------------------------------------------------------
 --
 
