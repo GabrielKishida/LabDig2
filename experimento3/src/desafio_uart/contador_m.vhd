@@ -13,7 +13,7 @@
 --     Data        Versao  Autor             Descricao
 --     09/09/2019  1.0     Edson Midorikawa  criacao
 --     08/06/2020  1.1     Edson Midorikawa  revisao e melhoria de codigo 
---     09/09/2020  1.2     Edson Midorikawa  revisao 
+--     09/09/2021  1.2     Edson Midorikawa  revisao 
 -------------------------------------------------------------------------
 --
 library IEEE;
@@ -21,7 +21,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use IEEE.math_real.all;
 
-entity contadorg_m is
+entity contador_m is
     generic (
         constant M: integer := 50 -- modulo do contador
     );
@@ -30,9 +30,9 @@ entity contadorg_m is
         Q: out std_logic_vector (natural(ceil(log2(real(M))))-1 downto 0);
         fim, meio: out std_logic 
    );
-end entity contadorg_m;
+end entity contador_m;
 
-architecture comportamental of contadorg_m is
+architecture comportamental of contador_m is
     signal IQ: integer range 0 to M-1;
 begin
   
