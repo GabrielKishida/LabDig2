@@ -1,3 +1,4 @@
+
 ------------------------------------------------------------------
 -- Arquivo   : rx_serial_8N2_fd.vhd
 -- Projeto   : Experiencia 3 - Recepcao Serial Assincrona
@@ -11,85 +12,109 @@
 ------------------------------------------------------------------
 --
 
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+USE IEEE.math_real.ALL;
 
-entity rx_serial_8N2_fd is
-    port (
-        clock, reset                    : in  std_logic;
-        zera, conta, carrega, desloca   : in  std_logic;
-        entrada_serial                  : in  std_logic;
-        tick, half_tick, fim_sinal      : out std_logic;
-        dados_ascii                     : out std_logic_vector (7 downto 0)
+ENTITY rx_serial_8N2_fd IS
+    PORT (
+        clock, reset : IN STD_LOGIC;
+        zera, conta, carrega, desloca : IN STD_LOGIC;
+        limpa, registra : IN STD_LOGIC;
+        entrada_serial : IN STD_LOGIC;
+        tick, fim_sinal : OUT STD_LOGIC;
+        dados_ascii : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+        db_deslocador : OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
     );
-end entity;
+END ENTITY;
 
-architecture rx_serial_8N2_fd_arch of rx_serial_8N2_fd is
-     
-    component deslocador_n
-    generic (
-        constant N: integer 
-    );
-    port (
-        clock, reset: in std_logic;
-        carrega, desloca, entrada_serial: in std_logic; 
-        dados: in std_logic_vector (N-1 downto 0);
-        saida: out  std_logic_vector (N-1 downto 0)
-    );
-    end component;
+ARCHITECTURE rx_serial_8N2_fd_arch OF rx_serial_8N2_fd IS
 
-    component contador_m
-    generic (
-        constant M: integer; 
-        constant N: integer 
-    );
-    port (
-        clock, zera, conta: in std_logic;
-        Q: out std_logic_vector (N-1 downto 0);
-        fim: out std_logic
-    );
-    end component;
-    
-    signal s_half_tick: std_logic;
+    COMPONENT deslocador_n
+        GENERIC (
+            CONSTANT N : INTEGER
+        );
+        PORT (
+            clock, reset : IN STD_LOGIC;
+            carrega, desloca, entrada_serial : IN STD_LOGIC;
+            dados : IN STD_LOGIC_VECTOR (N - 1 DOWNTO 0);
+            saida : OUT STD_LOGIC_VECTOR (N - 1 DOWNTO 0)
+        );
+    END COMPONENT;
 
-begin
+    COMPONENT contador_m
+        GENERIC (
+            CONSTANT M : INTEGER
+        );
+        PORT (
+            clock, zera_as, zera_s, conta : IN STD_LOGIC;
+            Q : OUT STD_LOGIC_VECTOR (NATURAL(ceil(log2(real(M)))) - 1 DOWNTO 0);
+            fim, meio : OUT STD_LOGIC
+        );
+    END COMPONENT;
 
-    DESLOCADOR: deslocador_n generic map (N => 8)  port map (
+    COMPONENT registrador_n
+        GENERIC (
+            CONSTANT N : INTEGER
+        );
+        PORT (
+            clock : IN STD_LOGIC;
+            clear : IN STD_LOGIC;
+            enable : IN STD_LOGIC;
+            D : IN STD_LOGIC_VECTOR (N - 1 DOWNTO 0);
+            Q : OUT STD_LOGIC_VECTOR (N - 1 DOWNTO 0)
+        );
+    END COMPONENT;
+
+    SIGNAL s_reset_cont : STD_LOGIC;
+    SIGNAL s_reset_cont_final : STD_LOGIC;
+    SIGNAL s_dados : STD_LOGIC_VECTOR(7 DOWNTO 0);
+
+BEGIN
+
+    DESLOCADOR : deslocador_n GENERIC MAP(
+        N => 8) PORT MAP (
         clock,
         reset,
         '0',
-        desloca, 
-        entrada_serial, 
-        "00000000", 
+        desloca,
+        entrada_serial,
+        "00000000",
+        s_dados
+    );
+
+    CONTADOR_SINAL : contador_m GENERIC MAP(
+        M => 10) PORT MAP (
+        clock,
+        reset,
+        zera,
+        conta,
+        OPEN,
+        fim_sinal,
+        OPEN
+    );
+
+    CONTADOR_TICK : contador_m GENERIC MAP(
+        M => 5208) PORT MAP (
+        clock,
+        reset,
+        zera, -- s_reset_cont_final, 
+        '1', -- clock, 
+        OPEN,
+        OPEN, -- s_reset_cont,
+        tick
+    );
+    REGISTRADOR : registrador_n GENERIC MAP(
+        N => 8) PORT MAP(
+        clock,
+        limpa,
+        registra,
+        s_dados,
         dados_ascii
     );
 
-    CONTADOR_SINAL: contador_m generic map (M => 8, N => 3) port map (
-        clock, 
-        zera, 
-        conta, 
-        open, 
-        fim_sinal
-    );
+    db_deslocador <= s_dados;
+    s_reset_cont_final <= s_reset_cont OR zera;
 
-    CONTADOR_TICK: contador_m generic map (M => 2, N => 1) port map (
-        s_half_tick, 
-        zera, 
-        conta, 
-        open, 
-        tick
-    );
-
-    CONTADOR_HALF_TICK: contador_m generic map (M => 2604, N => 12) port map (
-        clock, 
-        zera, 
-        conta, 
-        open, 
-        s_half_tick
-    );
-	
-    half_tick <= s_half_tick;
-    
-end architecture;
-
+END ARCHITECTURE;

@@ -27,7 +27,8 @@ entity deslocador_n is
         clock, reset:                     in  std_logic;
         carrega, desloca, entrada_serial: in  std_logic; 
         dados:                            in  std_logic_vector (N-1 downto 0);
-        saida:                            out std_logic_vector (N-1 downto 0)
+        saida:                            out std_logic_vector (N-1 downto 0);
+		  db_deslocado: 							out std_logic_vector (N-1 downto 0)
     );
 end deslocador_n;
 
@@ -47,6 +48,8 @@ begin
             end if;
         end if;
         saida <= IQ; 
+		  db_deslocado <= IQ;
     end process;
+	 
   
 end deslocador_n_arch;
