@@ -1,47 +1,56 @@
 
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-use IEEE.math_real.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+USE IEEE.math_real.ALL;
 
-entity contador_divisor is
-  
-   port (
-        clock, zera_as, zera_s, conta: in std_logic;
-        Q: out std_logic_vector (natural(ceil(log2(real(2941))))-1 downto 0);
-        fim, meio: out std_logic 
-   );
-end entity contador_divisor;
+ENTITY contador_divisor IS
 
-architecture comportamental of contador_divisor is
-    signal IQ: integer range 0 to 2941-1;
-begin
-  
-    process (clock,zera_as,zera_s,conta,IQ)
-    begin
-        if zera_as='1' then IQ <= 0;   
-        elsif rising_edge(clock) then
-            if zera_s='1' then IQ <= 0;
-            elsif conta='1' then 
-                if IQ=2941-1 then IQ <= 0; 
-                else IQ <= IQ + 1; 
-                end if;
-            else IQ <= IQ;
-            end if;
-        end if;
+    PORT (
+        clock, zera_as, zera_s, conta : IN STD_LOGIC;
+        Q : OUT STD_LOGIC_VECTOR (NATURAL(ceil(log2(real(2941)))) - 1 DOWNTO 0);
+        fim, meio : OUT STD_LOGIC
+    );
+END ENTITY contador_divisor;
+
+ARCHITECTURE comportamental OF contador_divisor IS
+    SIGNAL IQ : INTEGER RANGE 0 TO 2941 - 1;
+BEGIN
+
+    PROCESS (clock, zera_as, zera_s, conta, IQ)
+    BEGIN
+        IF zera_as = '1' THEN
+            IQ <= 0;
+        ELSIF rising_edge(clock) THEN
+            IF zera_s = '1' THEN
+                IQ <= 0;
+            ELSIF conta = '1' THEN
+                IF IQ = 2941 - 1 THEN
+                    IQ <= 0;
+                ELSE
+                    IQ <= IQ + 1;
+                END IF;
+            ELSE
+                IQ <= IQ;
+            END IF;
+        END IF;
 
         -- fim de contagem    
-        if IQ=2941-1 then fim <= '1'; 
-        else fim <= '0'; 
-        end if;
+        IF IQ = 2941 - 1 THEN
+            fim <= '1';
+        ELSE
+            fim <= '0';
+        END IF;
 
         -- meio da contagem
-        if IQ=2941/2-1 then meio <= '1'; 
-        else meio <= '0'; 
-        end if;
+        IF IQ = 2941/2 - 1 THEN
+            meio <= '1';
+        ELSE
+            meio <= '0';
+        END IF;
 
-        Q <= std_logic_vector(to_unsigned(IQ, Q'length));
+        Q <= STD_LOGIC_VECTOR(to_unsigned(IQ, Q'length));
 
-    end process;
+    END PROCESS;
 
-end comportamental;
+END comportamental;

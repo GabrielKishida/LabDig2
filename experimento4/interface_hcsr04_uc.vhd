@@ -1,95 +1,99 @@
 
-library ieee;
-use ieee.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 
-entity interface_hcsr04_uc is 
-    port (
-        clock           : in  std_logic;
-        reset           : in  std_logic;
-		medir			: in  std_logic;
-		fim 			: in  std_logic;
-		registra		: out std_logic;
-		gera			: out std_logic;
-		zera			: out std_logic;
-		pronto			: out std_logic;
-		db_estado		: out std_logic_vector(3 downto 0)
+ENTITY interface_hcsr04_uc IS
+    PORT (
+        clock : IN STD_LOGIC;
+        reset : IN STD_LOGIC;
+        medir : IN STD_LOGIC;
+        fim : IN STD_LOGIC;
+        registra : OUT STD_LOGIC;
+        gera : OUT STD_LOGIC;
+        zera : OUT STD_LOGIC;
+        pronto : OUT STD_LOGIC;
+        db_estado : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
     );
-end entity;
+END ENTITY;
 
-architecture interface_hcsr04_uc_arch of interface_hcsr04_uc is
+ARCHITECTURE interface_hcsr04_uc_arch OF interface_hcsr04_uc IS
 
-    type tipo_estado is (
+    TYPE tipo_estado IS (
         inicio,
-		preparacao,
-		envio,
-		espera,
-		armazena,
-		final
+        preparacao,
+        envio,
+        espera,
+        armazena,
+        final
     );
 
-    signal Eatual: tipo_estado;  -- estado atual
-    signal Eprox:  tipo_estado;  -- proximo estado
+    SIGNAL Eatual : tipo_estado; -- estado atual
+    SIGNAL Eprox : tipo_estado; -- proximo estado
 
-begin
+BEGIN
 
     -- memoria de estado
-    process (reset, clock)
-    begin
-        if reset = '1' then
+    PROCESS (reset, clock)
+    BEGIN
+        IF reset = '1' THEN
             Eatual <= inicio;
-        elsif clock'event and clock = '1' then
-            Eatual <= Eprox; 
-        end if;
-    end process;
+        ELSIF clock'event AND clock = '1' THEN
+            Eatual <= Eprox;
+        END IF;
+    END PROCESS;
 
-  -- logica de proximo estado
-    process (medir, fim, reset, Eatual) 
-    begin
-      case Eatual is
-        when inicio =>         if medir='1' then Eprox <= preparacao;
-										  else Eprox <= inicio;
-										  end if;
-										  
-		when preparacao =>		  Eprox <= envio;
-		
-		when envio =>			Eprox <= espera;
+    -- logica de proximo estado
+    PROCESS (medir, fim, reset, Eatual)
+    BEGIN
+        CASE Eatual IS
+            WHEN inicio => IF medir = '1' THEN
+                Eprox <= preparacao;
+            ELSE
+                Eprox <= inicio;
+        END IF;
 
-        when espera =>          if (fim='1') then Eprox <= armazena;
-                                else Eprox <= espera;
-                                end if;
-										  
-										  
-		when armazena => 		  Eprox <= final;
-		
-		when final =>			if reset='1' then Eprox <= inicio;
-								else Eprox <= final;
-								end if;	
-		  
-        when others =>          Eprox <= inicio;
-		  
-      end case;
-    end process;
+        WHEN preparacao => Eprox <= envio;
 
-    -- logica de saida (Moore)
-    with Eatual select
-        gera <= '1' when envio, '0' when others;
-		  
-	 with Eatual select
-		registra <= '1' when armazena, '0' when others;
+        WHEN envio => Eprox <= espera;
 
-    with Eatual select
-        zera <= '1' when preparacao, '0' when others;
+        WHEN espera => IF (fim = '1') THEN
+        Eprox <= armazena;
+    ELSE
+        Eprox <= espera;
+    END IF;
+    WHEN armazena => Eprox <= final;
 
-    with Eatual select
-        pronto <= '1' when final, '0' when others;
-    
-	 with Eatual select
-			db_estado <=    "0001" when inicio,
-								 "0010" when preparacao,
-							    "0011" when envio,
-							    "0100" when espera,
-							    "0101" when armazena,
-								"0110" when final,
-						 	    "0001" when others;
+    WHEN final => IF reset = '1' THEN
+    Eprox <= inicio;
+ELSE
+    Eprox <= final;
+END IF;
 
-end interface_hcsr04_uc_arch;
+WHEN OTHERS => Eprox <= inicio;
+
+END CASE;
+END PROCESS;
+
+-- logica de saida (Moore)
+WITH Eatual SELECT
+    gera <= '1' WHEN envio, '0' WHEN OTHERS;
+
+WITH Eatual SELECT
+    registra <= '1' WHEN armazena, '0' WHEN OTHERS;
+
+WITH Eatual SELECT
+    zera <= '1' WHEN preparacao, '0' WHEN OTHERS;
+
+WITH Eatual SELECT
+    pronto <= '1' WHEN final, '0' WHEN OTHERS;
+
+WITH Eatual SELECT
+    db_estado <= "0001" WHEN inicio,
+    "0010" WHEN preparacao,
+    "0011" WHEN envio,
+    "0100" WHEN espera,
+    "0101" WHEN armazena,
+    "0110" WHEN final,
+    "0001" WHEN OTHERS;
+
+END interface_hcsr04_uc_arch;

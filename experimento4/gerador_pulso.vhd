@@ -13,76 +13,75 @@
 --------------------------------------------------------------------
 --
 
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity gerador_pulso is
-   port(
-      clock:  in  std_logic;
-      reset:  in  std_logic;
-      gera:   in  std_logic;
-      para:   in  std_logic;
-      pulso:  out std_logic;
-      pronto: out std_logic
+ENTITY gerador_pulso IS
+   PORT (
+      clock : IN STD_LOGIC;
+      reset : IN STD_LOGIC;
+      gera : IN STD_LOGIC;
+      para : IN STD_LOGIC;
+      pulso : OUT STD_LOGIC;
+      pronto : OUT STD_LOGIC
    );
-end gerador_pulso;
+END gerador_pulso;
 
-architecture fsm_arch of gerador_pulso is
+ARCHITECTURE fsm_arch OF gerador_pulso IS
 
-   type tipo_estado is (parado, contagem, final);
-   signal reg_estado, prox_estado: tipo_estado;
-   signal reg_cont, prox_cont: integer range 0 to 500-1;
+   TYPE tipo_estado IS (parado, contagem, final);
+   SIGNAL reg_estado, prox_estado : tipo_estado;
+   SIGNAL reg_cont, prox_cont : INTEGER RANGE 0 TO 500 - 1;
 
-begin
+BEGIN
 
    -- estado e contagem
-   process(clock,reset)
-   begin
-      if (reset='1') then
+   PROCESS (clock, reset)
+   BEGIN
+      IF (reset = '1') THEN
          reg_estado <= parado;
          reg_cont <= 0;
-      elsif (clock'event and clock='1') then
+      ELSIF (clock'event AND clock = '1') THEN
          reg_estado <= prox_estado;
          reg_cont <= prox_cont;
-      end if;
-   end process;
+      END IF;
+   END PROCESS;
 
    -- logica de proximo estado e contagem
-   process(reg_estado, gera, para, reg_cont)
-   begin
+   PROCESS (reg_estado, gera, para, reg_cont)
+   BEGIN
       pulso <= '0';
       pronto <= '0';
       prox_cont <= reg_cont;
 
-      case reg_estado is
+      CASE reg_estado IS
 
-         when parado =>
-            if gera='1' then
+         WHEN parado =>
+            IF gera = '1' THEN
                prox_estado <= contagem;
-            else
+            ELSE
                prox_estado <= parado;
-            end if;
+            END IF;
             prox_cont <= 0;
 
-         when contagem =>
-            if para='1' then
+         WHEN contagem =>
+            IF para = '1' THEN
                prox_estado <= parado;
-            else
-               if (reg_cont=500-1) then
+            ELSE
+               IF (reg_cont = 500 - 1) THEN
                   prox_estado <= final;
-               else
+               ELSE
                   prox_estado <= contagem;
                   prox_cont <= reg_cont + 1;
-               end if;
-            end if;
+               END IF;
+            END IF;
             pulso <= '1';
 
-         when final =>
+         WHEN final =>
             prox_estado <= parado;
             pronto <= '1';
-      end case;
-   end process;
+      END CASE;
+   END PROCESS;
 
-end fsm_arch;
-
+END fsm_arch;
