@@ -1,79 +1,68 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-use IEEE.math_real.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+USE IEEE.math_real.ALL;
 
-entity interface_hcsr04 is
-    port (
-        clock               : in  std_logic;
-        reset               : in  std_logic;
-        echo				: in  std_logic;
-		medir				: in  std_logic;
-		pronto				: out std_logic;
-		trigger				: out std_logic;
-		medida				: out std_logic_vector(11 downto 0);
-		db_estado			: out std_logic_vector(3 downto 0)
-    );
-end entity;
+ENTITY interface_hcsr04 IS
+	PORT (
+		clock : IN STD_LOGIC;
+		reset : IN STD_LOGIC;
+		echo : IN STD_LOGIC;
+		medir : IN STD_LOGIC;
+		pronto : OUT STD_LOGIC;
+		trigger : OUT STD_LOGIC;
+		medida : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
+		db_estado : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+	);
+END ENTITY;
 
-architecture interface_hcsr04_arch of interface_hcsr04 is
-     
-  
-	
-	component interface_hcsr04_uc
-		port (
-			clock           : in  std_logic;
-			reset           : in  std_logic;
-			medir			: in  std_logic;
-			fim 			: in  std_logic;
-			registra		: out std_logic;
-			gera			: out std_logic;
-			zera			: out std_logic;
-			pronto			: out std_logic;
-			db_estado		: out std_logic_vector(3 downto 0)
+ARCHITECTURE interface_hcsr04_arch OF interface_hcsr04 IS
+
+	COMPONENT interface_hcsr04_uc
+		PORT (
+			clock : IN STD_LOGIC;
+			reset : IN STD_LOGIC;
+			medir : IN STD_LOGIC;
+			echo : IN STD_LOGIC;
+			registra : OUT STD_LOGIC;
+			gera : OUT STD_LOGIC;
+			zera : OUT STD_LOGIC;
+			pronto : OUT STD_LOGIC;
+			db_estado : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
 		);
-	end component;
-	
-	
-	component interface_hcsr04_fd
-		port (
-			clock, conta, zera, registra, gera  : in  std_logic;
-			distancia                 : out std_logic_vector (11 downto 0);
-			trigger, fim                     : out std_logic
+	END COMPONENT;
+	COMPONENT interface_hcsr04_fd
+		PORT (
+			clock, conta, zera, registra, gera : IN STD_LOGIC;
+			distancia : OUT STD_LOGIC_VECTOR (11 DOWNTO 0);
+			trigger, fim : OUT STD_LOGIC
 		);
-	end component;
-	
-    
+	END COMPONENT;
 
-    signal s_pronto, s_fim, s_zera, s_gera, s_registra : std_logic;
-    
-
-begin
-    -- unidade de controle
-    U1_UC: interface_hcsr04_uc port map (
-        clock,
-        reset,
+	SIGNAL s_pronto, s_zera, s_gera, s_registra : STD_LOGIC;
+BEGIN
+	-- unidade de controle
+	U1_UC : interface_hcsr04_uc PORT MAP(
+		clock,
+		reset,
 		medir,
-		s_fim,
+		echo,
 		s_registra,
 		s_gera,
 		s_zera,
 		pronto,
 		db_estado
-       
-    );
+	);
 
-    -- fluxo de dados
-    U2_FD: interface_hcsr04_fd port map (
-        clock,
+	-- fluxo de dados
+	U2_FD : interface_hcsr04_fd PORT MAP(
+		clock,
 		echo,
-        s_zera,
+		s_zera,
 		s_registra,
 		s_gera,
 		medida,
 		trigger,
-		s_fim        
-    );
-	 
-    
-end architecture;
+		OPEN
+	);
+END ARCHITECTURE;

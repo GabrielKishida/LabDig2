@@ -7,7 +7,7 @@ ENTITY interface_hcsr04_uc IS
         clock : IN STD_LOGIC;
         reset : IN STD_LOGIC;
         medir : IN STD_LOGIC;
-        fim : IN STD_LOGIC;
+        echo : IN STD_LOGIC;
         registra : OUT STD_LOGIC;
         gera : OUT STD_LOGIC;
         zera : OUT STD_LOGIC;
@@ -23,6 +23,7 @@ ARCHITECTURE interface_hcsr04_uc_arch OF interface_hcsr04_uc IS
         preparacao,
         envio,
         espera,
+        conta,
         armazena,
         final
     );
@@ -43,57 +44,69 @@ BEGIN
     END PROCESS;
 
     -- logica de proximo estado
-    PROCESS (medir, fim, reset, Eatual)
+    PROCESS (medir, echo, reset, Eatual)
     BEGIN
         CASE Eatual IS
-            WHEN inicio => IF medir = '1' THEN
-                Eprox <= preparacao;
-            ELSE
-                Eprox <= inicio;
-        END IF;
+            WHEN inicio =>
+                IF medir = '1' THEN
+                    Eprox <= preparacao;
+                ELSE
+                    Eprox <= inicio;
+                END IF;
 
-        WHEN preparacao => Eprox <= envio;
+            WHEN preparacao => Eprox <= envio;
 
-        WHEN envio => Eprox <= espera;
+            WHEN envio => Eprox <= espera;
 
-        WHEN espera => IF (fim = '1') THEN
-        Eprox <= armazena;
-    ELSE
-        Eprox <= espera;
-    END IF;
-    WHEN armazena => Eprox <= final;
+            WHEN espera =>
+                IF (echo = '1') THEN
+                    Eprox <= conta;
+                ELSE
+                    Eprox <= espera;
+                END IF;
 
-    WHEN final => IF reset = '1' THEN
-    Eprox <= inicio;
-ELSE
-    Eprox <= final;
-END IF;
+            WHEN conta =>
+                IF (echo = '0') THEN
+                    Eprox <= armazena;
+                ELSE
+                    Eprox <= conta;
+                END IF;
 
-WHEN OTHERS => Eprox <= inicio;
+            WHEN armazena => Eprox <= final;
 
-END CASE;
-END PROCESS;
+            WHEN final =>
+                IF medir = '1' THEN
+                    Eprox <= preparacao;
+                ELSE
+                    Eprox <= final;
+                END IF;
 
--- logica de saida (Moore)
-WITH Eatual SELECT
-    gera <= '1' WHEN envio, '0' WHEN OTHERS;
+            WHEN OTHERS => Eprox <= inicio;
 
-WITH Eatual SELECT
-    registra <= '1' WHEN armazena, '0' WHEN OTHERS;
+        END CASE;
+    END PROCESS;
 
-WITH Eatual SELECT
-    zera <= '1' WHEN preparacao, '0' WHEN OTHERS;
+    -- logica de saida (Moore)
+    WITH Eatual SELECT
+        gera <= '1' WHEN envio, '0' WHEN OTHERS;
 
-WITH Eatual SELECT
-    pronto <= '1' WHEN final, '0' WHEN OTHERS;
+    WITH Eatual SELECT
+        registra <= '1' WHEN armazena, '0' WHEN OTHERS;
 
-WITH Eatual SELECT
-    db_estado <= "0001" WHEN inicio,
-    "0010" WHEN preparacao,
-    "0011" WHEN envio,
-    "0100" WHEN espera,
-    "0101" WHEN armazena,
-    "0110" WHEN final,
-    "0001" WHEN OTHERS;
+    WITH Eatual SELECT
+        zera <= '1' WHEN preparacao, '0' WHEN OTHERS;
+
+    WITH Eatual SELECT
+        pronto <= '1' WHEN final, '0' WHEN OTHERS;
+
+    WITH Eatual SELECT
+        db_estado <= "0001" WHEN inicio,
+        "0010" WHEN preparacao,
+        "0011" WHEN envio,
+        "0100" WHEN espera,
+        "0101" WHEN conta,
+        "0110" WHEN armazena,
+        "0111" WHEN final,
+        "0001" WHEN OTHERS;
 
 END interface_hcsr04_uc_arch;
