@@ -1,49 +1,50 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-use IEEE.math_real.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+USE IEEE.math_real.ALL;
 
-entity medidor_largura is 
-    port ( clock, zera, echo:     in  std_logic;
-           dig3, dig2, dig1, dig0: out std_logic_vector(3 downto 0);
-           fim:                    out std_logic
-    );
-end medidor_largura;
-
-architecture medidor_arch of medidor_largura is
-
-	component contador_bcd_4digitos
-    port (
-           clock, zera, conta:     in  std_logic;
-           dig3, dig2, dig1, dig0: out std_logic_vector(3 downto 0);
-           fim:                    out std_logic
-    );
-	end component;
-	
-	component contador_divisor
-	port(
-			clock, zera_as, zera_s, conta: in std_logic;
-			Q: out std_logic_vector (natural(ceil(log2(real(2941))))-1 downto 0);
-			fim, meio: out std_logic 
+ENTITY medidor_largura IS
+	PORT (
+		clock, zera, echo : IN STD_LOGIC;
+		dig3, dig2, dig1, dig0 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+		fim : OUT STD_LOGIC
 	);
-	end component;
+END medidor_largura;
 
-	signal dig3_final, dig2_final, dig1_final, dig0_final: std_logic_vector(3 downto 0);
-	signal s_cm, s_fim: std_logic;
-	
-begin
+ARCHITECTURE medidor_arch OF medidor_largura IS
 
-	CONTADOR_INICIAL: contador_divisor port map(
+	COMPONENT contador_bcd_4digitos
+		PORT (
+			clock, zera, conta : IN STD_LOGIC;
+			dig3, dig2, dig1, dig0 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+			fim : OUT STD_LOGIC
+		);
+	END COMPONENT;
+
+	COMPONENT contador_divisor
+		PORT (
+			clock, zera_as, zera_s, conta : IN STD_LOGIC;
+			Q : OUT STD_LOGIC_VECTOR (NATURAL(ceil(log2(real(2941)))) - 1 DOWNTO 0);
+			fim, meio : OUT STD_LOGIC
+		);
+	END COMPONENT;
+
+	SIGNAL dig3_final, dig2_final, dig1_final, dig0_final : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	SIGNAL s_cm, s_fim : STD_LOGIC;
+
+BEGIN
+
+	CONTADOR_INICIAL : contador_divisor PORT MAP(
 		clock,
 		zera,
 		zera,
 		echo,
-		open,
+		OPEN,
 		s_cm,
-		open
+		OPEN
 	);
-	
-	CONTADOR_FINAL:	contador_bcd_4digitos port map(
+
+	CONTADOR_FINAL : contador_bcd_4digitos PORT MAP(
 		clock,
 		zera,
 		s_cm,
@@ -51,14 +52,12 @@ begin
 		dig2_final,
 		dig1_final,
 		dig0_final,
-		s_fim		
+		s_fim
 	);
-	
+
 	fim <= s_fim;
 	dig3 <= dig3_final;
 	dig2 <= dig2_final;
 	dig1 <= dig1_final;
 	dig0 <= dig0_final;
-
-
-end medidor_arch;
+END medidor_arch;
