@@ -103,3 +103,5 @@ WITH Eatual SELECT
     "100" WHEN transmissao,
     "101" WHEN final,
     "000" WHEN OTHERS;
+
+END tx_serial_tick_uc_arch;

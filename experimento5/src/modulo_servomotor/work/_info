@@ -1,0 +1,211 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/gabri/workspace/OrgArq/Ativ3
+Econtador_3bits
+Z0 w1634412398
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 dC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor
+Z5 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/contador_3bits.vhd
+Z6 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/contador_3bits.vhd
+l0
+L5
+VFziFK36ZP8R>D0G^7VgRD1
+!s100 10g_MgYbNQBmOgVSIR?VT0
+Z7 OV;C;10.5b;63
+32
+Z8 !s110 1634416136
+!i10b 1
+Z9 !s108 1634416136.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/contador_3bits.vhd|
+Z11 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/contador_3bits.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Aarch_contador_3bits
+R1
+R2
+R3
+DEx4 work 14 contador_3bits 0 22 FziFK36ZP8R>D0G^7VgRD1
+l21
+L15
+V3GE:AS>`z_1`6FNolEJ?00
+!s100 5CB@iG>KNWOh]B_=ZSoi[0
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Econtrole_servo
+Z14 w1634415986
+R1
+R2
+R3
+R4
+Z15 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_servo.vhd
+Z16 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_servo.vhd
+l0
+L5
+V4e1^?ZI0o;PS^6B9Dj2cl0
+!s100 U6GlYc==DLIP_0AJGHdf33
+R7
+32
+R8
+!i10b 1
+R9
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_servo.vhd|
+Z18 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_servo.vhd|
+!i113 1
+R12
+R13
+Artl
+R1
+R2
+R3
+DEx4 work 14 controle_servo 0 22 4e1^?ZI0o;PS^6B9Dj2cl0
+l24
+L16
+VNSY8HijS?1]ahJKk7FDI02
+!s100 XmP3TlD0FBfEPa^8AY5j>1
+R7
+32
+R8
+!i10b 1
+R9
+R17
+R18
+!i113 1
+R12
+R13
+Econtrole_servo_tb
+Z19 w1634416189
+R2
+R3
+R4
+Z20 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_servo_tb.vhd
+Z21 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_servo_tb.vhd
+l0
+L4
+VJB[6z7XQ@o;ZSD<n4>:6N3
+!s100 ]Pc9]o6O7WL0?4Y]k49DE1
+R7
+32
+Z22 !s110 1634416298
+!i10b 1
+Z23 !s108 1634416298.000000
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_servo_tb.vhd|
+Z25 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_servo_tb.vhd|
+!i113 1
+R12
+R13
+Atb
+R2
+R3
+DEx4 work 17 controle_servo_tb 0 22 JB[6z7XQ@o;ZSD<n4>:6N3
+l30
+L7
+V[3=?lOdWgNJDS8IF>QKBe2
+!s100 Ee@MOll:1>=0XPZ3H;>7T1
+R7
+32
+R22
+!i10b 1
+R23
+R24
+R25
+!i113 1
+R12
+R13
+Econtrole_sweep
+Z26 w1634409994
+R1
+R2
+R3
+R4
+Z27 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_sweep.vhd
+Z28 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_sweep.vhd
+l0
+L5
+VM6`6@9iEC847fS]2>S6nL1
+!s100 zao[G^Y9[UVeP]z9;zn`60
+R7
+32
+R22
+!i10b 1
+R23
+Z29 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_sweep.vhd|
+Z30 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_sweep.vhd|
+!i113 1
+R12
+R13
+Aarch_controle_sweep
+R1
+R2
+R3
+DEx4 work 14 controle_sweep 0 22 M6`6@9iEC847fS]2>S6nL1
+l44
+L17
+VF55>l:25WdWFHTKXmXa5N0
+!s100 MA1SC`_O:6SEHlXm_8?5D3
+R7
+32
+R22
+!i10b 1
+R23
+R29
+R30
+!i113 1
+R12
+R13
+Econtrole_sweep_tb
+Z31 w1634417006
+R2
+R3
+R4
+Z32 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_sweep_tb.vhd
+Z33 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_sweep_tb.vhd
+l0
+L4
+VDA?:]:`KcJnU=AJJmW^aT2
+!s100 1RBemeTC?zhR_EkizP<Ml2
+R7
+32
+Z34 !s110 1634417078
+!i10b 1
+Z35 !s108 1634417078.000000
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_sweep_tb.vhd|
+Z37 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_servomotor/controle_sweep_tb.vhd|
+!i113 1
+R12
+R13
+Atb
+R2
+R3
+Z38 DEx4 work 17 controle_sweep_tb 0 22 DA?:]:`KcJnU=AJJmW^aT2
+l32
+L7
+Vb20e:z`4[[g[`[G7fDPJf2
+!s100 O<VU[O`ZnKKikR3TD8CF]2
+R7
+32
+R34
+!i10b 1
+R35
+R36
+R37
+!i113 1
+R12
+R13
