@@ -37,10 +37,10 @@ ARCHITECTURE tb OF uart_tb IS
             pronto_rx : OUT STD_LOGIC;
             db_transmite_dado : OUT STD_LOGIC;
             db_saida_serial : OUT STD_LOGIC;
-            db_estado_tx : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+            db_estado_tx : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
             db_recebe_dado : OUT STD_LOGIC;
             db_dado_serial : OUT STD_LOGIC;
-            db_estado_rx : OUT STD_LOGIC_VECTOR (6 DOWNTO 0)
+            db_estado_rx : OUT STD_LOGIC_VECTOR (3 DOWNTO 0)
         );
     END COMPONENT;
 
@@ -59,7 +59,7 @@ ARCHITECTURE tb OF uart_tb IS
     SIGNAL db_recebe_dado_out, db_dado_serial_out : STD_LOGIC := '0';
     SIGNAL db_transmite_dado_out, db_saida_serial_rx_out : STD_LOGIC := '0';
     SIGNAL db_tick_rx_out, db_tick_tx_out : STD_LOGIC := '0';
-    SIGNAL db_estado_rx_out, db_estado_tx_out : STD_LOGIC_VECTOR (6 DOWNTO 0);
+    SIGNAL db_estado_rx_out, db_estado_tx_out : STD_LOGIC_VECTOR (3 DOWNTO 0);
 
     -- Configurações do clock
     SIGNAL keep_simulating : STD_LOGIC := '0'; -- delimita o tempo de geração do clock

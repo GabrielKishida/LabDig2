@@ -23,9 +23,9 @@ V=?JFUJKk2VSeHh[eMfG2B3
 !s100 h6VknzPN<1CEMg;cE3VcS1
 Z8 OV;C;10.5b;63
 32
-Z9 !s110 1634417623
+Z9 !s110 1634446928
 !i10b 1
-Z10 !s108 1634417623.000000
+Z10 !s108 1634446928.000000
 Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/contador_m.vhd|
 Z12 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/contador_m.vhd|
 !i113 1
@@ -220,11 +220,11 @@ VX2?jS9K[YhL1SR6K6_?T[2
 !s100 2:KGQ3VJh55Dh8[E47b6_2
 R8
 32
-R9
+Z38 !s110 1634446929
 !i10b 1
 R10
-Z38 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/registrador_n.vhd|
-Z39 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/registrador_n.vhd|
+Z39 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/registrador_n.vhd|
+Z40 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/registrador_n.vhd|
 !i113 1
 R13
 R14
@@ -238,34 +238,34 @@ V>>E58elNLBlV917fPPk>i2
 !s100 9HEogJ?JPL<Z`6]GeiMC^2
 R8
 32
-R9
+R38
 !i10b 1
 R10
-R38
 R39
+R40
 !i113 1
 R13
 R14
 Erx_serial_8n2
-Z40 w1634410025
+Z41 w1634447697
 R1
 R2
 R3
 R4
 R5
-Z41 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2.vhd
-Z42 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2.vhd
+Z42 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2.vhd
+Z43 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2.vhd
 l0
 L18
-VzLMLCo0G5URPTOSSRJ[=O2
-!s100 fAIWMd>4DlW8mD^RT<Vze0
+VD^WnfB3=Wnf:UA?6GliC^0
+!s100 Ye7N;D=fjTMB>H40?`k?S0
 R8
 32
-R9
+Z44 !s110 1634449191
 !i10b 1
-R10
-Z43 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2.vhd|
-Z44 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2.vhd|
+Z45 !s108 1634449191.000000
+Z46 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2.vhd|
+Z47 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2.vhd|
 !i113 1
 R13
 R14
@@ -274,41 +274,41 @@ R1
 R2
 R3
 R4
-DEx4 work 13 rx_serial_8n2 0 22 zLMLCo0G5URPTOSSRJ[=O2
-l79
-L36
-VBEXcgh8iNk999cQUWNNF_1
-!s100 L]J@VYN77;K8Pbah:0B9X1
+Z48 DEx4 work 13 rx_serial_8n2 0 22 D^WnfB3=Wnf:UA?6GliC^0
+l70
+L33
+VJe3O6g7HdD@P[Q7JFo0b70
+!s100 P5^8Hl99Ze649OYN?^h`A3
 R8
 32
-R9
-!i10b 1
-R10
-R43
 R44
+!i10b 1
+R45
+R46
+R47
 !i113 1
 R13
 R14
 Erx_serial_8n2_fd
-Z45 w1634410028
+Z49 w1634410028
 R1
 R2
 R3
 R4
 R5
-Z46 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_fd.vhd
-Z47 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_fd.vhd
+Z50 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_fd.vhd
+Z51 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_fd.vhd
 l0
 L20
 VnQBA`<a2Qk5=FzEgKETc10
 !s100 ]KK_:^RaR`z2YQPemVKV61
 R8
 32
-Z48 !s110 1634417644
+R38
 !i10b 1
-Z49 !s108 1634417644.000000
-Z50 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_fd.vhd|
-Z51 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_fd.vhd|
+Z52 !s108 1634446929.000000
+Z53 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_fd.vhd|
+Z54 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_fd.vhd|
 !i113 1
 R13
 R14
@@ -324,32 +324,75 @@ V30^=9]Q0l:liS7JlW8^XE1
 !s100 TfPkDEg`FO1F:S=4eb1j_2
 R8
 32
-R48
+R38
 !i10b 1
-R49
-R50
-R51
+R52
+R53
+R54
+!i113 1
+R13
+R14
+Erx_serial_tb
+Z55 w1634446056
+R2
+R3
+R4
+R5
+Z56 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_tb.vhd
+Z57 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_tb.vhd
+l0
+L20
+VN=ET<MDOY;RKfAmV9mY]k0
+!s100 ^UFXlok4neO9zCRn;eERJ1
+R8
+32
+Z58 !s110 1634446930
+!i10b 1
+Z59 !s108 1634446930.000000
+Z60 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_tb.vhd|
+Z61 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_tb.vhd|
+!i113 1
+R13
+R14
+Atb
+R1
+R48
+R2
+R3
+R4
+DEx4 work 12 rx_serial_tb 0 22 N=ET<MDOY;RKfAmV9mY]k0
+l89
+L23
+Vhdh?[Z]mEQ[b^chPcRD3^1
+!s100 _]X<nk0YQ?FF29ZHH]Y:a3
+R8
+32
+R58
+!i10b 1
+R59
+R60
+R61
 !i113 1
 R13
 R14
 Erx_serial_tick_uc
-Z52 w1634410026
+Z62 w1634410026
 R3
 R4
 R5
-Z53 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_tick_uc.vhd
-Z54 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_tick_uc.vhd
+Z63 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_tick_uc.vhd
+Z64 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_tick_uc.vhd
 l0
 L20
 Vlkf4^c0Gz0LQB024LW2C;0
 !s100 i5DMSkh73YfD40d8FN8?o2
 R8
 32
-Z55 !s110 1634417624
+R38
 !i10b 1
-Z56 !s108 1634417624.000000
-Z57 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_tick_uc.vhd|
-Z58 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_tick_uc.vhd|
+R52
+Z65 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_tick_uc.vhd|
+Z66 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/rx_serial_8N2_tick_uc.vhd|
 !i113 1
 R13
 R14
@@ -363,34 +406,34 @@ V6EzimNJO2Ue:LQ]REjz5S2
 !s100 i1odJjM3BBIOf;cOQXB]=1
 R8
 32
-R55
+R38
 !i10b 1
-R56
-R57
-R58
+R52
+R65
+R66
 !i113 1
 R13
 R14
 Etx_serial_8n2
-Z59 w1634410021
+Z67 w1634446922
 R1
 R2
 R3
 R4
 R5
-Z60 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2.vhd
-Z61 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2.vhd
+Z68 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2.vhd
+Z69 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2.vhd
 l0
 L6
-V1N=3f]Xm8lVmK7fXMBhkj1
-!s100 TcI949<[b_VnJ6z5_QKng1
+VU>[XB0HU>:6Cz<8mSImiB0
+!s100 W`BIG>g:XIYC2c7Ci]X651
 R8
 32
-R55
+R38
 !i10b 1
-R56
-Z62 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2.vhd|
-Z63 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2.vhd|
+R52
+Z70 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2.vhd|
+Z71 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2.vhd|
 !i113 1
 R13
 R14
@@ -399,41 +442,41 @@ R1
 R2
 R3
 R4
-DEx4 work 13 tx_serial_8n2 0 22 1N=3f]Xm8lVmK7fXMBhkj1
-l68
+DEx4 work 13 tx_serial_8n2 0 22 U>[XB0HU>:6Cz<8mSImiB0
+l56
 L20
-Vo4[`iXS`X4d?A38ZTJOh@2
-!s100 WZaiXEFz@=1Pb6MIicoT?3
+VPE>Bjg09e4X4F4T7@?hF03
+!s100 3TH=7E<47<8M:7Jk:oQia2
 R8
 32
-R55
+R38
 !i10b 1
-R56
-R62
-R63
+R52
+R70
+R71
 !i113 1
 R13
 R14
 Etx_serial_8n2_fd
-Z64 w1634410023
+Z72 w1634410023
 R1
 R2
 R3
 R4
 R5
-Z65 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2_fd.vhd
-Z66 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2_fd.vhd
+Z73 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2_fd.vhd
+Z74 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2_fd.vhd
 l0
 L22
 ViT7ZX]0P1:DlP]aahX62W2
 !s100 8<k5DmCO[DMQQ>_X;G3840
 R8
 32
-R55
+R38
 !i10b 1
-R56
-Z67 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2_fd.vhd|
-Z68 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2_fd.vhd|
+R52
+Z75 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2_fd.vhd|
+Z76 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_8N2_fd.vhd|
 !i113 1
 R13
 R14
@@ -449,73 +492,114 @@ V`SSAn=I`:@5N6VkIl9<DE1
 !s100 [IJKa_]RT7m1iM?CU0L6X1
 R8
 32
-R55
+R38
 !i10b 1
-R56
-R67
-R68
+R52
+R75
+R76
+!i113 1
+R13
+R14
+Etx_serial_tb
+Z77 w1634446707
+R2
+R3
+R4
+R5
+Z78 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tb.vhd
+Z79 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tb.vhd
+l0
+L19
+Vlk@R3OL?6BSEfAH=lWUgH2
+!s100 5e48NkQkoKhZLm;kF9;II0
+R8
+32
+R58
+!i10b 1
+R59
+Z80 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tb.vhd|
+Z81 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tb.vhd|
+!i113 1
+R13
+R14
+Atb
+R2
+R3
+R4
+DEx4 work 12 tx_serial_tb 0 22 lk@R3OL?6BSEfAH=lWUgH2
+l57
+L22
+V^<1R6HQ:^ll[:z7XIamf60
+!s100 il3W>6mn@9j39[TAY[lJi3
+R8
+32
+R58
+!i10b 1
+R59
+R80
+R81
 !i113 1
 R13
 R14
 Etx_serial_tick_uc
-Z69 w1634410713
+Z82 w1634444771
 R3
 R4
 R5
-Z70 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tick_uc.vhd
-Z71 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tick_uc.vhd
+Z83 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tick_uc.vhd
+Z84 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tick_uc.vhd
 l0
 L21
-V8OTZWl9<RZL8bBO0O_;hS0
-!s100 4<Pog0]JocjO7NDC0;2QS0
+VTUzi;P^U6=`b7ef3oKT1P3
+!s100 8i2PjSek?RhjX5:2_Fdie0
 R8
 32
-R55
+R58
 !i10b 1
-R56
-Z72 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tick_uc.vhd|
-Z73 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tick_uc.vhd|
+R52
+Z85 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tick_uc.vhd|
+Z86 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/tx_serial_tick_uc.vhd|
 !i113 1
 R13
 R14
 Atx_serial_tick_uc_arch
 R3
 R4
-DEx4 work 17 tx_serial_tick_uc 0 22 8OTZWl9<RZL8bBO0O_;hS0
+DEx4 work 17 tx_serial_tick_uc 0 22 TUzi;P^U6=`b7ef3oKT1P3
 l35
 L29
-VbB<EXN`LH]GSF=@4>YS`z2
-!s100 E`jbg34hiGj7>Lbh5CAMj0
+VO@I`il=3<2JI_KF@iAORm2
+!s100 2HoO5DlN6mIKhE?zR@Ydc3
 R8
 32
-R55
+R58
 !i10b 1
-R56
-R72
-R73
+R52
+R85
+R86
 !i113 1
 R13
 R14
 Euart_8n2
-Z74 w1634417534
+Z87 w1634446183
 R1
 R2
 R3
 R4
 R5
-Z75 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_8N2.vhd
-Z76 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_8N2.vhd
+Z88 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_8N2.vhd
+Z89 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_8N2.vhd
 l0
 L18
-Vg^Vl3]09[HLWAbDZZei>51
-!s100 [XKOU<nb3z8AW4W3gcGfX2
+VHQZm`_kFk?<O=ZZBj1BZQ3
+!s100 7D6L]`LR`o>7UQn8mI@Nm1
 R8
 32
-R55
+R58
 !i10b 1
-R56
-Z77 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_8N2.vhd|
-Z78 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_8N2.vhd|
+R59
+Z90 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_8N2.vhd|
+Z91 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_8N2.vhd|
 !i113 1
 R13
 R14
@@ -524,40 +608,40 @@ R1
 R2
 R3
 R4
-DEx4 work 8 uart_8n2 0 22 g^Vl3]09[HLWAbDZZei>51
-l76
-L40
-VXgbHOKjWP_nIkWQiFP8a@1
-!s100 U9UeW7E::7eR__>Mm2GeZ3
+DEx4 work 8 uart_8n2 0 22 HQZm`_kFk?<O=ZZBj1BZQ3
+l74
+L41
+VXHV4^Y@g1`iK2MT^QFW9e0
+!s100 L6oFeXc=Nkf61aK6Fi5Oj3
 R8
 32
-R55
+R58
 !i10b 1
-R56
-R77
-R78
+R59
+R90
+R91
 !i113 1
 R13
 R14
 Euart_tb
-Z79 w1634418070
+Z92 w1634445307
 R2
 R3
 R4
 R5
-Z80 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_tb.vhd
-Z81 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_tb.vhd
+Z93 8C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_tb.vhd
+Z94 FC:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_tb.vhd
 l0
 L19
 VGPSfa4a]j6]JzU`L2jfMA0
 !s100 XelT9<ZlCQ[mG?7VYPYYV2
 R8
 32
-Z82 !s110 1634418074
+R58
 !i10b 1
-Z83 !s108 1634418074.000000
-Z84 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_tb.vhd|
-Z85 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_tb.vhd|
+R59
+Z95 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_tb.vhd|
+Z96 !s107 C:/Users/gabri/workspace/LabDig2/experimento5/src/modulo_uart/uart_tb.vhd|
 !i113 1
 R13
 R14
@@ -568,15 +652,15 @@ R4
 DEx4 work 7 uart_tb 0 22 GPSfa4a]j6]JzU`L2jfMA0
 l68
 L22
-VNOWWFUUH`oVfYCaX@Gjn81
-!s100 O0O63i?2Egm^heU8idZo21
+VR2b^akFA3DHW]HA9KbaD:0
+!s100 kL?Z]^Nb@h4G[[7=CQ>SY2
 R8
 32
-R82
+R58
 !i10b 1
-R83
-R84
-R85
+R59
+R95
+R96
 !i113 1
 R13
 R14

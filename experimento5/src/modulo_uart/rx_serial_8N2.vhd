@@ -21,15 +21,12 @@ ENTITY rx_serial_8N2 IS
         reset : IN STD_LOGIC;
         dado_serial : IN STD_LOGIC;
         recebe_dado : IN STD_LOGIC;
-        pronto_rx : OUT STD_LOGIC;
-        tem_dado : OUT STD_LOGIC;
         dado_recebido : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
-        db_dado_recebido_0 : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
-        db_dado_recebido_1 : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
-        db_tick : OUT STD_LOGIC;
-        db_estado : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
+        tem_dado : OUT STD_LOGIC;
+        pronto_rx : OUT STD_LOGIC;
+        db_recebe_dado : OUT STD_LOGIC;
         db_dado_serial : OUT STD_LOGIC;
-        db_deslocador : OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+        db_estado : OUT STD_LOGIC_VECTOR (3 DOWNTO 0)
     );
 END ENTITY;
 
@@ -64,24 +61,18 @@ ARCHITECTURE rx_serial_8N2_arch OF rx_serial_8N2 IS
         db_deslocador : OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
         );
     END COMPONENT;
-    COMPONENT hex7seg PORT (
-        hexa : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-        sseg : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
-        );
-    END COMPONENT;
 
     SIGNAL s_zera, s_conta, s_carrega, s_desloca, s_tick, s_conta_baud : STD_LOGIC;
-    SIGNAL s_fim_sinal, s_registra, s_limpa, s_dado_serial : STD_LOGIC;
+    SIGNAL s_fim_sinal, s_registra, s_limpa : STD_LOGIC;
 
     SIGNAL s_dados_ascii : STD_LOGIC_VECTOR(7 DOWNTO 0);
-    SIGNAL s_db_estado : STD_LOGIC_VECTOR (3 DOWNTO 0);
 
 BEGIN
     -- unidade de controle
     U1_UC : rx_serial_tick_uc PORT MAP(
         clock,
         reset,
-        s_dado_serial,
+        dado_serial,
         s_tick,
         s_fim_sinal,
         recebe_dado,
@@ -93,7 +84,7 @@ BEGIN
         s_registra,
         s_limpa,
         s_desloca,
-        s_db_estado
+        db_estado
     );
 
     -- fluxo de dados
@@ -106,30 +97,15 @@ BEGIN
         s_desloca,
         s_limpa,
         s_registra,
-        s_dado_serial,
+        dado_serial,
         s_tick,
         s_fim_sinal,
         s_dados_ascii,
-        db_deslocador
+        OPEN
     );
 
-    DB_ESTADO_7SEG : hex7seg PORT MAP(
-        hexa => s_db_estado(3 DOWNTO 0),
-        sseg => db_estado
-    );
-
-    DB_DADO_7SEG_0 : hex7seg PORT MAP(
-        hexa => s_dados_ascii(3 DOWNTO 0),
-        sseg => db_dado_recebido_0
-    );
-
-    DB_DADO_7SEG_1 : hex7seg PORT MAP(
-        hexa => s_dados_ascii(7 DOWNTO 4),
-        sseg => db_dado_recebido_1
-    );
-    s_dado_serial <= dado_serial;
-    db_dado_serial <= s_dado_serial;
+    db_dado_serial <= dado_serial;
+    db_recebe_dado <= recebe_dado;
     dado_recebido <= s_dados_ascii;
-    db_tick <= s_tick;
 
 END ARCHITECTURE;

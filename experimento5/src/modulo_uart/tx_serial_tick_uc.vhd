@@ -22,7 +22,7 @@ ENTITY tx_serial_tick_uc IS
     PORT (
         clock, reset, partida, tick, fim : IN STD_LOGIC;
         zera, conta, carrega, desloca, pronto : OUT STD_LOGIC;
-        db_estado : OUT STD_LOGIC_VECTOR (2 DOWNTO 0)
+        db_estado : OUT STD_LOGIC_VECTOR (3 DOWNTO 0)
     );
 END ENTITY;
 
@@ -97,11 +97,11 @@ WITH Eatual SELECT
     pronto <= '1' WHEN final, '0' WHEN OTHERS;
 
 WITH Eatual SELECT
-    db_estado <= "001" WHEN inicial,
-    "010" WHEN preparacao,
-    "011" WHEN espera,
-    "100" WHEN transmissao,
-    "101" WHEN final,
-    "000" WHEN OTHERS;
+    db_estado <= "0001" WHEN inicial,
+    "0010" WHEN preparacao,
+    "0011" WHEN espera,
+    "0100" WHEN transmissao,
+    "0101" WHEN final,
+    "0000" WHEN OTHERS;
 
 END tx_serial_tick_uc_arch;
