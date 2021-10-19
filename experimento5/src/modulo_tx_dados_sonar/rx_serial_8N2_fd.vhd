@@ -69,23 +69,23 @@ ARCHITECTURE rx_serial_8N2_fd_arch OF rx_serial_8N2_fd IS
 
     SIGNAL s_reset_cont : STD_LOGIC;
     SIGNAL s_reset_cont_final : STD_LOGIC;
-    SIGNAL s_dados : STD_LOGIC_VECTOR(7 DOWNTO 0);
+    SIGNAL s_dados : STD_LOGIC_VECTOR(9 DOWNTO 0);
 
 BEGIN
 
     DESLOCADOR : deslocador_n GENERIC MAP(
-        N => 8) PORT MAP (
+        N => 10) PORT MAP (
         clock,
         reset,
         '0',
         desloca,
         entrada_serial,
-        "00000000",
+        "0000000000",
         s_dados
     );
 
     CONTADOR_SINAL : contador_m GENERIC MAP(
-        M => 10) PORT MAP (
+        M => 12) PORT MAP (
         clock,
         reset,
         zera,
@@ -110,11 +110,11 @@ BEGIN
         clock,
         limpa,
         registra,
-        s_dados,
+        s_dados (7 DOWNTO 0),
         dados_ascii
     );
 
-    db_deslocador <= s_dados;
+    db_deslocador <= s_dados(7 DOWNTO 0);
     s_reset_cont_final <= s_reset_cont OR zera;
 
 END ARCHITECTURE;
