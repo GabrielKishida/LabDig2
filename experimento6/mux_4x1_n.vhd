@@ -15,7 +15,7 @@ entity mux_4x1_n is
     );
 end entity;
 
-architecture behav of mux_8x1_n is
+architecture behav of mux_4x1_n is
 begin
     MUX_OUT <= D3 when (SEL = "11") else
                D2 when (SEL = "10") else

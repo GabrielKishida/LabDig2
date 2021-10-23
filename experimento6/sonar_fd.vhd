@@ -7,25 +7,41 @@ ENTITY sonar_fd IS
     PORT (
         clock : IN STD_LOGIC;
         reset : IN STD_LOGIC;
-        partida : IN STD_LOGIC;
-        dados_ascii : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-        saida_serial : OUT STD_LOGIC;
-        pronto_tx : OUT STD_LOGIC;
-        db_partida : OUT STD_LOGIC;
-        db_saida_serial : OUT STD_LOGIC;
-        db_estado : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+        ligar : IN STD_LOGIC;
+		medir : IN STD_LOGIC;
+		echo : IN STD_LOGIC;
+		transmitir: IN STD_LOGIC;
+		pronto: OUT STD_LOGIC;
+		saida_serial: OUT STD_LOGIC;
+		pwm: OUT STD_LOGIC;
+		trigger: OUT STD_LOGIC;
+		
+        
     );
 END ENTITY;
 
 ARCHITECTURE sonar_fd_arch OF sonar_fd IS
 
-    COMPONENT tx_dados_sonar 
-	PORT (
-        clock, reset, partida, tick, fim : IN STD_LOGIC;
-        zera, conta, carrega, desloca, pronto : OUT STD_LOGIC;
-        db_estado : OUT STD_LOGIC_VECTOR (3 DOWNTO 0)
-        );
-    END COMPONENT;
+    ENTITY tx_dados_sonar IS
+    PORT (
+        clock : IN STD_LOGIC;
+        reset : IN STD_LOGIC;
+        transmitir : IN STD_LOGIC;
+        angulo2 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+        angulo1 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+        angulo0 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+        distancia2 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+        distancia1 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+        distancia0 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+        saida_serial : OUT STD_LOGIC;
+        pronto : OUT STD_LOGIC;
+        db_transmitir : OUT STD_LOGIC;
+        db_transmite_dado : OUT STD_LOGIC;
+        db_saida_serial : OUT STD_LOGIC;
+        db_estado_tx : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+        db_estado_uc : OUT STD_LOGIC_VECTOR (2 DOWNTO 0)
+    );
+END ENTITY;
 	
 	COMPONENT controle_sweep
 	PORT (
