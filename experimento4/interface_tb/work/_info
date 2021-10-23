@@ -1,0 +1,402 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb
+Econtador_bcd_4digitos
+Z1 w1634494586
+Z2 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 39
+R0
+Z5 8C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/contador_bcd_4digitos.vhd
+Z6 FC:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/contador_bcd_4digitos.vhd
+l0
+Z7 L22 1
+VH6;NRGV:RgbmaaaEDz<kH3
+!s100 P>5]QT8_Wz>=oMPd<fBU41
+Z8 OV;C;2020.1;71
+32
+Z9 !s110 1634527698
+!i10b 1
+Z10 !s108 1634527698.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/contador_bcd_4digitos.vhd|
+Z12 !s107 C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/contador_bcd_4digitos.vhd|
+!i113 1
+Z13 o-work work -2002 -explicit
+Z14 tExplicit 1 CvgOpt 0
+Acomportamental
+R2
+R3
+R4
+DEx4 work 21 contador_bcd_4digitos 0 22 H6;NRGV:RgbmaaaEDz<kH3
+!i122 39
+l34
+L30 51
+V_OA[Y<Eh[D7h93F5]ef9T0
+!s100 DACDeYaa7cc<U976_S<?@0
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Econtador_divisor
+R1
+Z15 DPx4 ieee 9 math_real 0 22 gNk<PdFJ<XNPcfef`f?Z81
+R2
+R3
+R4
+!i122 40
+R0
+Z16 8C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/contador_divisor.vhd
+Z17 FC:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/contador_divisor.vhd
+l0
+L7 1
+VQ>o3INCW8kh4TIbE@DZJB0
+!s100 ND[V?WR1I5:SgRzb8Gfn20
+R8
+32
+R9
+!i10b 1
+R10
+Z18 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/contador_divisor.vhd|
+Z19 !s107 C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/contador_divisor.vhd|
+!i113 1
+R13
+R14
+Acomportamental
+R15
+R2
+R3
+R4
+DEx4 work 16 contador_divisor 0 22 Q>o3INCW8kh4TIbE@DZJB0
+!i122 40
+l18
+L16 41
+VO[]8^9Ta?c`YQ_BHX?Pc<2
+!s100 On1[4TN==abo<d1AFji@:3
+R8
+32
+R9
+!i10b 1
+R10
+R18
+R19
+!i113 1
+R13
+R14
+Egerador_pulso
+R1
+R2
+R3
+R4
+!i122 41
+R0
+Z20 8C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\gerador_pulso.vhd
+Z21 FC:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\gerador_pulso.vhd
+l0
+L20 1
+Vcf@b09aQcfmiO4cTOQOW=2
+!s100 3T@PMP2WDo7ShgC1I0PzA2
+R8
+32
+R9
+!i10b 1
+R10
+Z22 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\gerador_pulso.vhd|
+Z23 !s107 C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\gerador_pulso.vhd|
+!i113 1
+R13
+R14
+Afsm_arch
+R2
+R3
+R4
+DEx4 work 13 gerador_pulso 0 22 cf@b09aQcfmiO4cTOQOW=2
+!i122 41
+l37
+L31 57
+Vo;oTlIdAk6:V9z0F^mG0e2
+!s100 hGP7M]gOY9McVhVk]GoC_3
+R8
+32
+R9
+!i10b 1
+R10
+R22
+R23
+!i113 1
+R13
+R14
+Einterface_hcsr04
+Z24 w1634527674
+R15
+R2
+R3
+R4
+!i122 42
+R0
+Z25 8C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04.vhd
+Z26 FC:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04.vhd
+l0
+L6 1
+VXXkIj4LSAz>R2Ti63U=hg1
+!s100 4^6:GfMdOhnS:NzbO:2hJ1
+R8
+32
+R9
+!i10b 1
+R10
+Z27 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04.vhd|
+Z28 !s107 C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04.vhd|
+!i113 1
+R13
+R14
+Ainterface_hcsr04_arch
+R15
+R2
+R3
+R4
+DEx4 work 16 interface_hcsr04 0 22 XXkIj4LSAz>R2Ti63U=hg1
+!i122 42
+l45
+L21 54
+VTM=N_X637>KTTK7mI3f[n0
+!s100 =zoBjiD95B_8K<N6mV][<2
+R8
+32
+R9
+!i10b 1
+R10
+R27
+R28
+!i113 1
+R13
+R14
+Einterface_hcsr04_fd
+R1
+R15
+R2
+R3
+R4
+!i122 43
+R0
+Z29 8C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04_fd.vhd
+Z30 FC:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04_fd.vhd
+l0
+L7 1
+Vk=1PXE>GRoKcY[N12TQ853
+!s100 aiW;Hjl9DE60aMYk<AoFj0
+R8
+32
+R9
+!i10b 1
+R10
+Z31 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04_fd.vhd|
+Z32 !s107 C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04_fd.vhd|
+!i113 1
+R13
+R14
+Aarch
+R15
+R2
+R3
+R4
+DEx4 work 19 interface_hcsr04_fd 0 22 k=1PXE>GRoKcY[N12TQ853
+!i122 43
+l50
+L15 70
+V_jXeJ>>T0TILY00>>cZ1S1
+!s100 0L_@E8GKg[NMUE]2=gzNa1
+R8
+32
+R9
+!i10b 1
+R10
+R31
+R32
+!i113 1
+R13
+R14
+Einterface_hcsr04_tb
+Z33 w1634507715
+R2
+R3
+R4
+!i122 44
+R0
+Z34 8C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04_tb.vhd
+Z35 FC:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04_tb.vhd
+l0
+L19 1
+VBEUHcZ8[W;:VNWVChRHS11
+!s100 PIN^KD@56UFX80;BoU;eo1
+R8
+32
+Z36 !s110 1634527699
+!i10b 1
+R10
+Z37 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04_tb.vhd|
+Z38 !s107 C:\Users\guazco\Documents\labdig2\exp5\LabDig2\experimento4\interface_tb\interface_hcsr04_tb.vhd|
+!i113 1
+R13
+R14
+Atb
+R2
+R3
+R4
+Z39 DEx4 work 19 interface_hcsr04_tb 0 22 BEUHcZ8[W;:VNWVChRHS11
+!i122 44
+l57
+Z40 L22 138
+Z41 VFEm6f_I;U40H0LP=7EaaP0
+Z42 !s100 ei8WQBK<Ij0V^EO7`oo@13
+R8
+32
+R36
+!i10b 1
+R10
+R37
+R38
+!i113 1
+R13
+R14
+Einterface_hcsr04_uc
+R1
+R3
+R4
+!i122 36
+R0
+Z43 8C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/interface_hcsr04_uc.vhd
+Z44 FC:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/interface_hcsr04_uc.vhd
+l0
+L5 1
+V4m0UbhSX4AhgU7<^kLe?23
+!s100 :4K3a6InPWE=mPTcCh<VM3
+R8
+32
+Z45 !s110 1634527697
+!i10b 1
+Z46 !s108 1634527697.000000
+Z47 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/interface_hcsr04_uc.vhd|
+Z48 !s107 C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/interface_hcsr04_uc.vhd|
+!i113 1
+R13
+R14
+Ainterface_hcsr04_uc_arch
+R3
+R4
+DEx4 work 19 interface_hcsr04_uc 0 22 4m0UbhSX4AhgU7<^kLe?23
+!i122 36
+l34
+L19 94
+Vl3GmiDg@3Q6iPA9j1W2zG3
+!s100 hV^4BfHPNjFDzR6j@;26`0
+R8
+32
+R45
+!i10b 1
+R46
+R47
+R48
+!i113 1
+R13
+R14
+Emedidor_largura
+R1
+R15
+R2
+R3
+R4
+!i122 37
+R0
+Z49 8C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/medidor_largura.vhd
+Z50 FC:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/medidor_largura.vhd
+l0
+L6 1
+Vag;B4G3b_e1^_ld@Bol@I2
+!s100 @IoUL[knKU=Sja4=a2i_20
+R8
+32
+R9
+!i10b 1
+R10
+Z51 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/medidor_largura.vhd|
+Z52 !s107 C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/medidor_largura.vhd|
+!i113 1
+R13
+R14
+Amedidor_arch
+R15
+R2
+R3
+R4
+DEx4 work 15 medidor_largura 0 22 ag;B4G3b_e1^_ld@Bol@I2
+!i122 37
+l34
+L13 52
+VMm6jEk7MSk7Ga:7;i5aPR3
+!s100 <_=<@PdfR9[VM0Son?1JG1
+R8
+32
+R9
+!i10b 1
+R10
+R51
+R52
+!i113 1
+R13
+R14
+Eregistrador_n
+R1
+R3
+R4
+!i122 38
+R0
+Z53 8C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/registrador_n.vhd
+Z54 FC:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/registrador_n.vhd
+l0
+R7
+V1QQ8B`Fd]3k=BZ5BJcdIG1
+!s100 >C4dfB5hPY2UIOH:9mBz70
+R8
+32
+R9
+!i10b 1
+R10
+Z55 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/registrador_n.vhd|
+Z56 !s107 C:/Users/guazco/Documents/labdig2/exp5/LabDig2/experimento4/interface_tb/registrador_n.vhd|
+!i113 1
+R13
+R14
+Aregistrador_n
+R3
+R4
+DEx4 work 13 registrador_n 0 22 1QQ8B`Fd]3k=BZ5BJcdIG1
+!i122 38
+l37
+L35 16
+VZ<IJlab9^3VUkh8CD8hM=0
+!s100 zOkOc8FPi4hbRU01ildY61
+R8
+32
+R9
+!i10b 1
+R10
+R55
+R56
+!i113 1
+R13
+R14

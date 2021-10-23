@@ -15,7 +15,6 @@ ENTITY interface_hcsr04 IS
 		db_reset: OUT STD_LOGIC;
 		db_medir: OUT STD_LOGIC;
 		db_estado : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
-		
 	);
 END ENTITY;
 
@@ -68,8 +67,8 @@ BEGIN
 		trigger,
 		OPEN
 	);
-	
-	db_medir <= medir;
+
 	db_reset <= reset;
-	
+	db_medir <= medir;
+
 END ARCHITECTURE;

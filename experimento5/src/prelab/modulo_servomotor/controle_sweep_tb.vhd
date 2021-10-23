@@ -61,9 +61,13 @@ BEGIN
 
     liga_in <= '1';
 
-    WAIT FOR 750 * clockPeriod;
+    WAIT FOR 1000 * clockPeriod;
 
     ASSERT db_posicao_out = "100" REPORT "Servo não demora o tempo esperado para atingir uma posição esperada" SEVERITY failure;
+
+	---- período para visualização do estado
+
+	WAIT FOR 100 * clockPeriod;
 
     liga_in <= '0';
 
