@@ -15,85 +15,91 @@
 ------------------------------------------------------------------
 --
 
-library ieee;
-use ieee.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 
-entity tx_serial_tick_uc is 
-    port ( clock, reset, partida, tick, fim:      in  std_logic;
-           zera, conta, carrega, desloca, pronto: out std_logic;
-			  db_estado:									  out std_logic_vector (2 downto 0)
+ENTITY tx_serial_tick_uc IS
+    PORT (
+        clock, reset, partida, tick, fim : IN STD_LOGIC;
+        zera, conta, carrega, desloca, pronto : OUT STD_LOGIC;
+        db_estado : OUT STD_LOGIC_VECTOR (2 DOWNTO 0)
     );
-end entity;
+END ENTITY;
 
-architecture tx_serial_tick_uc_arch of tx_serial_tick_uc is
+ARCHITECTURE tx_serial_tick_uc_arch OF tx_serial_tick_uc IS
 
-    type tipo_estado is (inicial, preparacao, espera, transmissao, final);
-    signal Eatual: tipo_estado;  -- estado atual
-    signal Eprox:  tipo_estado;  -- proximo estado
+    TYPE tipo_estado IS (inicial, preparacao, espera, transmissao, final);
+    SIGNAL Eatual : tipo_estado; -- estado atual
+    SIGNAL Eprox : tipo_estado; -- proximo estado
 
-begin
+BEGIN
 
     -- memoria de estado
-    process (reset, clock)
-    begin
-        if reset = '1' then
+    PROCESS (reset, clock)
+    BEGIN
+        IF reset = '1' THEN
             Eatual <= inicial;
-        elsif clock'event and clock = '1' then
-            Eatual <= Eprox; 
-        end if;
-    end process;
+        ELSIF clock'event AND clock = '1' THEN
+            Eatual <= Eprox;
+        END IF;
+    END PROCESS;
 
-  -- logica de proximo estado
-    process (partida, tick, fim, Eatual) 
-    begin
+    -- logica de proximo estado
+    PROCESS (partida, tick, fim, Eatual)
+    BEGIN
 
-      case Eatual is
+        CASE Eatual IS
 
-        when inicial =>          if partida='1' then Eprox <= preparacao;
-                                 else                Eprox <= inicial;
-                                 end if;
+            WHEN inicial => IF partida = '1' THEN
+                Eprox <= preparacao;
+            ELSE
+                Eprox <= inicial;
+        END IF;
 
-        when preparacao =>       Eprox <= espera;
+        WHEN preparacao => Eprox <= espera;
 
-        when espera =>           if tick='1' then   Eprox <= transmissao;
-                                 elsif fim='0' then Eprox <= espera;
-                                 else               Eprox <= final;
-                                 end if;
+        WHEN espera => IF tick = '1' THEN
+        Eprox <= transmissao;
+    ELSIF fim = '0' THEN
+        Eprox <= espera;
+    ELSE
+        Eprox <= final;
+    END IF;
 
-        when transmissao =>      if fim='0' then Eprox <= espera;
-                                 else            Eprox <= final;
-                                 end if;
- 
-        when final =>            Eprox <= inicial;
+    WHEN transmissao => IF fim = '0' THEN
+    Eprox <= espera;
+ELSE
+    Eprox <= final;
+END IF;
 
-        when others =>           Eprox <= inicial;
+WHEN final => Eprox <= inicial;
 
-      end case;
+WHEN OTHERS => Eprox <= inicial;
 
-    end process;
+END CASE;
 
-    -- logica de saida (Moore)
-    with Eatual select
-        carrega <= '1' when preparacao, '0' when others;
+END PROCESS;
 
-    with Eatual select
-        zera <= '1' when preparacao, '0' when others;
+-- logica de saida (Moore)
+WITH Eatual SELECT
+    carrega <= '1' WHEN preparacao, '0' WHEN OTHERS;
 
-    with Eatual select
-        desloca <= '1' when transmissao, '0' when others;
+WITH Eatual SELECT
+    zera <= '1' WHEN preparacao, '0' WHEN OTHERS;
 
-    with Eatual select
-        conta <= '1' when transmissao, '0' when others;
+WITH Eatual SELECT
+    desloca <= '1' WHEN transmissao, '0' WHEN OTHERS;
 
-    with Eatual select
-        pronto <= '1' when final, '0' when others;
-		  
-	 with Eatual select
-			db_estado <= "001" when inicial,
-							 "010" when preparacao,
-							 "011" when espera,
-							 "100" when transmissao,
-							 "101" when final,
-							 "000" when others;
+WITH Eatual SELECT
+    conta <= '1' WHEN transmissao, '0' WHEN OTHERS;
 
-end tx_serial_tick_uc_arch;
+WITH Eatual SELECT
+    pronto <= '1' WHEN final, '0' WHEN OTHERS;
+
+WITH Eatual SELECT
+    db_estado <= "001" WHEN inicial,
+    "010" WHEN preparacao,
+    "011" WHEN espera,
+    "100" WHEN transmissao,
+    "101" WHEN final,
+    "000" WHEN OTHERS;
