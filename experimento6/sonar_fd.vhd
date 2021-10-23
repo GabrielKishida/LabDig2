@@ -12,11 +12,13 @@ ENTITY sonar_fd IS
 		echo : IN STD_LOGIC;
 		transmitir: IN STD_LOGIC;
 		selmux: IN STD_LOGIC_VECTOR(1 downto 0);
-		pronto: OUT STD_LOGIC;
+		pronto_interface: OUT STD_LOGIC;
+		pronto_tx_sonar: OUT STD_LOGIC;
 		saida_serial: OUT STD_LOGIC;
 		pwm: OUT STD_LOGIC;
 		trigger: OUT STD_LOGIC;
-		proximidade: OUT STD_LOGIC
+		proximidade: OUT STD_LOGIC;
+		depuracao: out STD_LOGIC_VECTOR(23 downto 0)
         
     );
 END ENTITY;
@@ -101,7 +103,7 @@ ARCHITECTURE sonar_fd_arch OF sonar_fd IS
 	
 	
 
-   SIGNAL s_angulo0: STD_LOGIC_VECTOR(3 downto 0);
+	SIGNAL s_angulo0: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL s_angulo1: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL s_angulo2: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL s_distancia0: STD_LOGIC_VECTOR(3 downto 0);
@@ -191,8 +193,15 @@ BEGIN
 	);
 	
 	proximidade <= s_proximo;
+	s_medir <= medir;
+	s_distancia2 <= s_medida(11 downto 8);
+	s_distancia1 <= s_medida(7 downto 4);
+	s_distancia0 <= s_medida(3 downto 0);
+	pronto_tx_sonar <= s_pronto_transmissao;
+	pronto_interface <= s_pronto_interface;
+	depuracao <= s_depuracao;
 	
-   sinais00 <= s_posicao & db_estado_interface & "00000" & s_distancia2 & s_distancia1 & s_distancia2;
+	sinais00 <= s_posicao & db_estado_interface & "00000" & s_distancia2 & s_distancia1 & s_distancia2;
 	sinais01 <= "0000" & "0000" & "0000" & "0000" & "0000" & "0000";
 	sinais10 <= s_db_estado_tx_sonar & "0000" & "0000" & "0000" & "0000" & "0000";
 	sinais11 <= "0000" & "0000" & "0000" & s_angulo2 & s_angulo1 & s_angulo0;
