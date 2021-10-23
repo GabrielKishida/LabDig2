@@ -11,6 +11,7 @@ ENTITY sonar_fd IS
 		medir : IN STD_LOGIC;
 		echo : IN STD_LOGIC;
 		transmitir: IN STD_LOGIC;
+		selmux: IN STD_LOGIC_VECTOR(1 downto 0);
 		pronto: OUT STD_LOGIC;
 		saida_serial: OUT STD_LOGIC;
 		pwm: OUT STD_LOGIC;
@@ -113,6 +114,14 @@ ARCHITECTURE sonar_fd_arch OF sonar_fd IS
 	SIGNAL s_medida: STD_LOGIC_VECTOR(11 downto 0);
 	SIGNAL s_posicao: STD_LOGIC_VECTOR(2 downto 0);
 	SIGNAL s_proximo: STD_LOGIC;
+	SIGNAL sinais00 : STD_LOGIC_VECTOR(23 downto 0);
+	SIGNAL sinais01 : STD_LOGIC_VECTOR(23 downto 0);
+	SIGNAL sinais10 : STD_LOGIC_VECTOR(23 downto 0);
+	SIGNAL sinais11 : STD_LOGIC_VECTOR(23 downto 0);
+	SIGNAL s_depuracao : STD_LOGIC_VECTOR(23 downto 0);
+	SIGNAL db_estado_interface : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	SIGNAL s_db_estado_tx_sonar : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	
 
 BEGIN
 
@@ -134,7 +143,7 @@ BEGIN
 		open,
 		open,
 		open,
-		open,
+		s_db_estado_tx_sonar,
 		open
 	);
 	
@@ -156,15 +165,19 @@ BEGIN
 		s_pronto_interface,
 		trigger,
 		s_medida,
-		open		
+		db_estado_interface		
 	);
 	
 	MUX4: mux_4x1_n generic map(
 		BITS => 12
 	)
 	port map(
-		
-	
+		sinais00,
+		sinais01,
+		sinais10,
+		sinais11,
+		selmux,
+		s_depuracao		
 	);
 	
 	DECODIFICADOR: dec_pos_ang port map(
@@ -181,6 +194,9 @@ BEGIN
 	
 	proximidade <= s_proximo;
 	
-    
+    sinais00 <= s_posicao & db_estado_interface & "0000" & s_distancia2 & s_distancia1 & s_distancia2;
+	sinais01 <= "0000" & "0000" & "0000" & "0000" & "0000" & "0000";
+	sinais10 <= s_db_estado_tx_sonar & "0000" & "0000" & "0000" & "0000" & "0000" & "0000";
+	sinais11 <= "0000" & "0000" & "0000" & s_angulo2 & s_angulo1 & s_angulo0;
 	
 END ARCHITECTURE;
