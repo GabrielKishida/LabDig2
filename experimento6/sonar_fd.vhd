@@ -16,8 +16,7 @@ ENTITY sonar_fd IS
 		saida_serial: OUT STD_LOGIC;
 		pwm: OUT STD_LOGIC;
 		trigger: OUT STD_LOGIC;
-		proximidade: OUT STD_LOGIC;
-		
+		proximidade: OUT STD_LOGIC
         
     );
 END ENTITY;
@@ -87,29 +86,29 @@ ARCHITECTURE sonar_fd_arch OF sonar_fd IS
 	COMPONENT dec_pos_ang
 	PORT (
 		posicao: IN STD_LOGIC_VECTOR(2 downto 0);
-		angulo0: STD_LOGIC_VECTOR(3 downto 0);
-		angulo1: STD_LOGIC_VECTOR(3 downto 0);
-		angulo2: STD_LOGIC_VECTOR(3 downto 0)
+		angulo0: out STD_LOGIC_VECTOR(3 downto 0);
+		angulo1: out STD_LOGIC_VECTOR(3 downto 0);
+		angulo2: out STD_LOGIC_VECTOR(3 downto 0)
 	);
 	END  COMPONENT;
 	
 	component alerta_proximidade
     port ( 
-        medida : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
+        medida : in STD_LOGIC_VECTOR(11 DOWNTO 0);
         proximo: out std_logic
     );
 	end component;
 	
 	
 
-    SIGNAL s_angulo0: STD_LOGIC_VECTOR(3 downto 0);
+   SIGNAL s_angulo0: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL s_angulo1: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL s_angulo2: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL s_distancia0: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL s_distancia1: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL s_distancia2: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL s_pronto_interface: STD_LOGIC;
-	SIGNAL s_pronto_transmissao
+	SIGNAL s_pronto_transmissao: STD_LOGIC;
 	SIGNAL s_medir: STD_LOGIC;
 	SIGNAL s_medida: STD_LOGIC_VECTOR(11 downto 0);
 	SIGNAL s_posicao: STD_LOGIC_VECTOR(2 downto 0);
@@ -126,7 +125,6 @@ ARCHITECTURE sonar_fd_arch OF sonar_fd IS
 BEGIN
 
     -- sinais reset e partida mapeados na GPIO (ativos em alto)
-    s_reset <= reset;
 
     TRANSMISSAO: tx_dados_sonar port map(
 		clock,
@@ -169,7 +167,7 @@ BEGIN
 	);
 	
 	MUX4: mux_4x1_n generic map(
-		BITS => 12
+		BITS => 24
 	)
 	port map(
 		sinais00,
@@ -187,16 +185,16 @@ BEGIN
 		s_angulo2
 	);
 	
-	PROXIMIDADE: alerta_proximidade port map(
+	ALERTA: alerta_proximidade port map(
 		s_medida,
 		s_proximo
 	);
 	
 	proximidade <= s_proximo;
 	
-    sinais00 <= s_posicao & db_estado_interface & "0000" & s_distancia2 & s_distancia1 & s_distancia2;
+   sinais00 <= s_posicao & db_estado_interface & "00000" & s_distancia2 & s_distancia1 & s_distancia2;
 	sinais01 <= "0000" & "0000" & "0000" & "0000" & "0000" & "0000";
-	sinais10 <= s_db_estado_tx_sonar & "0000" & "0000" & "0000" & "0000" & "0000" & "0000";
+	sinais10 <= s_db_estado_tx_sonar & "0000" & "0000" & "0000" & "0000" & "0000";
 	sinais11 <= "0000" & "0000" & "0000" & s_angulo2 & s_angulo1 & s_angulo0;
 	
 END ARCHITECTURE;

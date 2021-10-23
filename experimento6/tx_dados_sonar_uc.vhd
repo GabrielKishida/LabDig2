@@ -35,7 +35,7 @@ BEGIN
     END PROCESS;
 
     -- logica de proximo estado
-    PROCESS (clock, fim, transmite)
+    PROCESS (Eatual, fim_tx, fim_contagem, transmitir)
     BEGIN
         CASE Eatual IS
             WHEN inicial =>

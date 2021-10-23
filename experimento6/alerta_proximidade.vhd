@@ -3,12 +3,12 @@ USE ieee.std_logic_1164.ALL;
 
 entity alerta_proximidade is
     port ( 
-        medida : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
+        medida : in STD_LOGIC_VECTOR(11 DOWNTO 0);
         proximo: out std_logic
     );
 end entity;
 
-architecture behav of alert_proximidade is
+architecture behav of alerta_proximidade is
 begin
     process(medida)
 	begin
@@ -22,5 +22,6 @@ begin
 		else 
 			proximo <= '0';
 		end if;
+	end process;
 
 end behav;

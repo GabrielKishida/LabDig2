@@ -4,13 +4,14 @@ USE ieee.std_logic_1164.ALL;
 ENTITY dec_pos_ang IS
 	PORT (
 		posicao: IN STD_LOGIC_VECTOR(2 downto 0);
-		angulo0: STD_LOGIC_VECTOR(3 downto 0);
-		angulo1: STD_LOGIC_VECTOR(3 downto 0);
-		angulo2: STD_LOGIC_VECTOR(3 downto 0)
+		angulo0: OUT STD_LOGIC_VECTOR(3 downto 0);
+		angulo1: OUT STD_LOGIC_VECTOR(3 downto 0);
+		angulo2: OUT STD_LOGIC_VECTOR(3 downto 0)
 	);
 END  dec_pos_ang;
 
 ARCHITECTURE arch_ang of dec_pos_ang is
+begin
 
 	with posicao select 
 		angulo2 <= "0000" when "000", -- 20
