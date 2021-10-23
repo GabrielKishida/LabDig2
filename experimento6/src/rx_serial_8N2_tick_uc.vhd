@@ -84,6 +84,7 @@ BEGIN
         Eprox <= espera;
     END IF;
     WHEN recepcao => Eprox <= espera;
+
     WHEN armazena => Eprox <= final;
 
     WHEN final => Eprox <= dado_presente;

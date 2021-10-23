@@ -94,6 +94,8 @@ BEGIN
         db_estado => db_estado_rx,
         db_dado_serial => db_dado_serial
     );
+
     db_transmite_dado <= transmite_dado;
     db_recebe_dado <= recebe_dado;
+
 END ARCHITECTURE;
