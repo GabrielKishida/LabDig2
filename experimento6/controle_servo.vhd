@@ -23,7 +23,7 @@ ARCHITECTURE rtl OF controle_servo IS
 
 BEGIN
 
-  PROCESS (clock, reset, posicao)
+  PROCESS (clock, reset, s_posicao)
   BEGIN
     -- inicia contagem e posicao
     IF (reset = '1') THEN

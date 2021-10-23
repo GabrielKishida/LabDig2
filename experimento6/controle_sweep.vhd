@@ -7,6 +7,7 @@ ENTITY controle_sweep IS
 		clock : IN STD_LOGIC; -- 50MHz
 		reset : IN STD_LOGIC;
 		liga : IN STD_LOGIC;
+		tick : OUT STD_LOGIC;
 		db_posicao : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
 		db_slider : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
 		pwm : OUT STD_LOGIC;
@@ -32,6 +33,7 @@ ARCHITECTURE arch_controle_sweep OF controle_sweep IS
 			clock : IN STD_LOGIC;
 			enable : IN STD_LOGIC;
 			reset : IN STD_LOGIC;
+			tick: OUT STD_LOGIC;
 			dado : OUT STD_LOGIC_VECTOR(2 DOWNTO 0)
 		);
 	END COMPONENT;
@@ -46,6 +48,7 @@ BEGIN
 		clock => clock,
 		enable => liga,
 		reset => reset,
+		tick => tick,
 		dado => s_posicao);
 
 	controle : controle_servo PORT MAP(

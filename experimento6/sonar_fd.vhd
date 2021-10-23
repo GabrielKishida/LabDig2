@@ -8,7 +8,6 @@ ENTITY sonar_fd IS
         clock : IN STD_LOGIC;
         reset : IN STD_LOGIC;
         ligar : IN STD_LOGIC;
-		medir : IN STD_LOGIC;
 		echo : IN STD_LOGIC;
 		transmitir: IN STD_LOGIC;
 		selmux: IN STD_LOGIC_VECTOR(1 downto 0);
@@ -48,13 +47,16 @@ ARCHITECTURE sonar_fd_arch OF sonar_fd IS
 	
 	COMPONENT controle_sweep
 	PORT (
+		
 		clock : IN STD_LOGIC; -- 50MHz
 		reset : IN STD_LOGIC;
 		liga : IN STD_LOGIC;
+		tick : OUT STD_LOGIC;
 		db_posicao : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
 		db_slider : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
 		pwm : OUT STD_LOGIC;
-		db_pwm : OUT STD_LOGIC);
+		db_pwm : OUT STD_LOGIC
+		);
 
 	END COMPONENT;
 	
@@ -111,7 +113,6 @@ ARCHITECTURE sonar_fd_arch OF sonar_fd IS
 	SIGNAL s_distancia2: STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL s_pronto_interface: STD_LOGIC;
 	SIGNAL s_pronto_transmissao: STD_LOGIC;
-	SIGNAL s_medir: STD_LOGIC;
 	SIGNAL s_medida: STD_LOGIC_VECTOR(11 downto 0);
 	SIGNAL s_posicao: STD_LOGIC_VECTOR(2 downto 0);
 	SIGNAL s_proximo: STD_LOGIC;
@@ -122,6 +123,7 @@ ARCHITECTURE sonar_fd_arch OF sonar_fd IS
 	SIGNAL s_depuracao : STD_LOGIC_VECTOR(23 downto 0);
 	SIGNAL db_estado_interface : STD_LOGIC_VECTOR(3 DOWNTO 0);
 	SIGNAL s_db_estado_tx_sonar : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	SIGNAL s_tick: STD_LOGIC;
 	
 
 BEGIN
@@ -151,6 +153,7 @@ BEGIN
 		clock,
 		reset,
 		ligar,
+		s_tick,
 		s_posicao,
 		open,
 		pwm,
@@ -161,7 +164,7 @@ BEGIN
 		clock,
 		reset,
 		echo,
-		s_medir,
+		s_tick,
 		s_pronto_interface,
 		trigger,
 		s_medida,
@@ -193,7 +196,6 @@ BEGIN
 	);
 	
 	proximidade <= s_proximo;
-	s_medir <= medir;
 	s_distancia2 <= s_medida(11 downto 8);
 	s_distancia1 <= s_medida(7 downto 4);
 	s_distancia0 <= s_medida(3 downto 0);
