@@ -15,6 +15,7 @@ ENTITY sonar_fd IS
 		saida_serial: OUT STD_LOGIC;
 		pwm: OUT STD_LOGIC;
 		trigger: OUT STD_LOGIC;
+		proximidade: OUT STD_LOGIC;
 		
         
     );
@@ -22,7 +23,7 @@ END ENTITY;
 
 ARCHITECTURE sonar_fd_arch OF sonar_fd IS
 
-    ENTITY tx_dados_sonar IS
+    component tx_dados_sonar
     PORT (
         clock : IN STD_LOGIC;
         reset : IN STD_LOGIC;
@@ -41,7 +42,7 @@ ARCHITECTURE sonar_fd_arch OF sonar_fd IS
         db_estado_tx : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
         db_estado_uc : OUT STD_LOGIC_VECTOR (2 DOWNTO 0)
     );
-END ENTITY;
+	END component;
 	
 	COMPONENT controle_sweep
 	PORT (
@@ -82,7 +83,7 @@ END ENTITY;
     );
 	end component;
 	
-	ENTITY dec_pos_ang
+	COMPONENT dec_pos_ang
 	PORT (
 		posicao: IN STD_LOGIC_VECTOR(2 downto 0);
 		angulo0: STD_LOGIC_VECTOR(3 downto 0);
@@ -91,35 +92,95 @@ END ENTITY;
 	);
 	END  COMPONENT;
 	
+	component alerta_proximidade
+    port ( 
+        medida : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
+        proximo: out std_logic
+    );
+	end component;
+	
 	
 
-    SIGNAL s_reset : STD_LOGIC;
-    SIGNAL s_zera, s_conta, s_carrega, s_desloca, s_tick, s_fim : STD_LOGIC;
-    SIGNAL s_saida_serial : STD_LOGIC;
-
-    SIGNAL s_db_deslocado : STD_LOGIC_VECTOR (11 DOWNTO 0);
-    SIGNAL s_db_estado_hex_in : STD_LOGIC_VECTOR (3 DOWNTO 0);
+    SIGNAL s_angulo0: STD_LOGIC_VECTOR(3 downto 0);
+	SIGNAL s_angulo1: STD_LOGIC_VECTOR(3 downto 0);
+	SIGNAL s_angulo2: STD_LOGIC_VECTOR(3 downto 0);
+	SIGNAL s_distancia0: STD_LOGIC_VECTOR(3 downto 0);
+	SIGNAL s_distancia1: STD_LOGIC_VECTOR(3 downto 0);
+	SIGNAL s_distancia2: STD_LOGIC_VECTOR(3 downto 0);
+	SIGNAL s_pronto_interface: STD_LOGIC;
+	SIGNAL s_pronto_transmissao
+	SIGNAL s_medir: STD_LOGIC;
+	SIGNAL s_medida: STD_LOGIC_VECTOR(11 downto 0);
+	SIGNAL s_posicao: STD_LOGIC_VECTOR(2 downto 0);
+	SIGNAL s_proximo: STD_LOGIC;
 
 BEGIN
 
     -- sinais reset e partida mapeados na GPIO (ativos em alto)
     s_reset <= reset;
 
-    -- unidade de controle
-    U1_UC : tx_serial_tick_uc PORT MAP(
-        clock, s_reset, partida, s_tick, s_fim,
-        s_zera, s_conta, s_carrega, s_desloca, pronto_tx, db_estado);
-
-    -- fluxo de dados
-    U2_FD : tx_serial_8N2_fd PORT MAP(
-        clock, s_reset, s_zera, s_conta, s_carrega, s_desloca,
-        dados_ascii, s_saida_serial, s_fim, s_db_deslocado);
-
-    -- gerador de tick
-    -- fator de divisao 50MHz para 9600 bauds (5208=50M/9600)
-    U3_TICK : contador_m GENERIC MAP(M => 5208) PORT MAP(clock, s_zera, '0', '1', OPEN, s_tick, OPEN);
-
-    saida_serial <= s_saida_serial;
-    db_saida_serial <= s_saida_serial;
-    db_partida <= partida;
+    TRANSMISSAO: tx_dados_sonar port map(
+		clock,
+		reset,
+		transmitir,
+		s_angulo0,
+		s_angulo1,
+		s_angulo2,
+		s_distancia0,
+		s_distancia1,
+		s_distancia2,
+		saida_serial,
+		s_pronto_transmissao,
+		open,
+		open,
+		open,
+		open,
+		open
+	);
+	
+	CONTROLE_SERVO: controle_sweep port map(
+		clock,
+		reset,
+		ligar,
+		s_posicao,
+		open,
+		pwm,
+		open
+	);
+	
+	INTERFACE: interface_hcsr04 port map(
+		clock,
+		reset,
+		echo,
+		s_medir,
+		s_pronto_interface,
+		trigger,
+		s_medida,
+		open		
+	);
+	
+	MUX4: mux_4x1_n generic map(
+		BITS => 12
+	)
+	port map(
+		
+	
+	);
+	
+	DECODIFICADOR: dec_pos_ang port map(
+		s_posicao,
+		s_angulo0,
+		s_angulo1,
+		s_angulo2
+	);
+	
+	PROXIMIDADE: alerta_proximidade port map(
+		s_medida,
+		s_proximo
+	);
+	
+	proximidade <= s_proximo;
+	
+    
+	
 END ARCHITECTURE;
