@@ -37,7 +37,45 @@ ARCHITECTURE sonar_fd_arch OF sonar_fd IS
 		pwm : OUT STD_LOGIC;
 		db_pwm : OUT STD_LOGIC);
 
-END controle_sweep;
+	END COMPONENT;
+	
+	COMPONENT interface_hcsr04
+	PORT (
+		clock : IN STD_LOGIC;
+		reset : IN STD_LOGIC;
+		echo : IN STD_LOGIC;
+		medir : IN STD_LOGIC;
+		pronto : OUT STD_LOGIC;
+		trigger : OUT STD_LOGIC;
+		medida : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
+		db_estado : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+	);
+	END COMPONENT;
+	
+	component mux_4x1_n
+    generic (
+        constant BITS: integer
+    );
+    port ( 
+        D0 :     in  std_logic_vector (BITS-1 downto 0);
+        D1 :     in  std_logic_vector (BITS-1 downto 0);
+        D2 :     in  std_logic_vector (BITS-1 downto 0);
+        D3 :     in  std_logic_vector (BITS-1 downto 0);
+        SEL:     in  std_logic_vector (1 downto 0);
+        MUX_OUT: out std_logic_vector (BITS-1 downto 0)
+    );
+	end component;
+	
+	ENTITY dec_pos_ang
+	PORT (
+		posicao: IN STD_LOGIC_VECTOR(2 downto 0);
+		angulo0: STD_LOGIC_VECTOR(3 downto 0);
+		angulo1: STD_LOGIC_VECTOR(3 downto 0);
+		angulo2: STD_LOGIC_VECTOR(3 downto 0)
+	);
+	END  COMPONENT;
+	
+	
 
     SIGNAL s_reset : STD_LOGIC;
     SIGNAL s_zera, s_conta, s_carrega, s_desloca, s_tick, s_fim : STD_LOGIC;
