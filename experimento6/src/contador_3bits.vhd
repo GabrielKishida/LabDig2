@@ -15,7 +15,7 @@ END contador_3bits;
 
 ARCHITECTURE arch_contador_3bits OF contador_3bits IS
 
-	CONSTANT TEMPO_BASE : INTEGER := 1000000;
+	CONSTANT TEMPO_BASE : INTEGER := 2000000;
 	CONSTANT TEMPO_BASE_2 : INTEGER := TEMPO_BASE / 2;
 	CONSTANT CONTAGEM_MAXIMA : INTEGER := TEMPO_BASE * 7;
 	SIGNAL subindo : STD_LOGIC;
@@ -49,24 +49,6 @@ BEGIN
 
 	PROCESS (contagem, reset, subindo)
 	BEGIN
-		--IF (reset = '1') THEN
-		--	dado <= "000";
-		--ELSIF (contagem < 50000000 * 1) THEN
-		--	dado <= "001";
-		--ELSIF (50000000 * 1 <= contagem AND contagem < 50000000 * 2) THEN
-		--	dado <= "010";
-		--ELSIF (50000000 * 2 <= contagem AND contagem < 50000000 * 3) THEN
-		--	dado <= "011";
-		--ELSIF (50000000 * 3 <= contagem AND contagem < 50000000 * 4) THEN
-		--	dado <= "100";
-		--ELSIF (50000000 * 4 <= contagem AND contagem < 50000000 * 5) THEN
-		--	dado <= "101";
-		--ELSIF (50000000 * 5 <= contagem AND contagem < 50000000 * 6) THEN
-		--	dado <= "110";
-		--ELSIF (50000000 * 6 <= contagem AND contagem < 50000000 * 7) THEN
-		--	dado <= "111";
-		--END IF;
-
 		IF (reset = '1') THEN
 			s_dado <= "000";
 		ELSIF (contagem < TEMPO_BASE * 1 AND subindo = '1') THEN

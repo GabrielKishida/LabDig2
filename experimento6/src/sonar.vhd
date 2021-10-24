@@ -10,6 +10,8 @@ ENTITY sonar IS
 		ligar : IN STD_LOGIC;
 		echo : IN STD_LOGIC;
 		selmux : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+		entrada_serial : IN STD_LOGIC;
+		recebe_dado : IN STD_LOGIC;
 		pronto_tx_sonar : OUT STD_LOGIC;
 		saida_serial : OUT STD_LOGIC;
 		pwm : OUT STD_LOGIC;
@@ -34,6 +36,8 @@ ARCHITECTURE sonar_arch OF sonar IS
 			clock : IN STD_LOGIC;
 			reset : IN STD_LOGIC;
 			transmitir : IN STD_LOGIC;
+			entrada_serial : IN STD_LOGIC;
+			recebe_dado : IN STD_LOGIC;
 			angulo2 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 			angulo1 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 			angulo0 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -108,6 +112,7 @@ ARCHITECTURE sonar_arch OF sonar IS
 	COMPONENT alerta_proximidade
 		PORT (
 			medida : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+			medida_pronto : IN STD_LOGIC;
 			proximo : OUT STD_LOGIC
 		);
 	END COMPONENT;
@@ -161,12 +166,14 @@ BEGIN
 		clock => clock,
 		reset => reset,
 		transmitir => s_transmitir,
+		entrada_serial => entrada_serial,
+		recebe_dado => recebe_dado,
 		angulo2 => s_angulo2,
 		angulo1 => s_angulo1,
 		angulo0 => s_angulo0,
-		distancia2 => s_angulo2,
-		distancia1 => s_angulo1,
-		distancia0 => s_angulo0,
+		distancia2 => s_distancia2,
+		distancia1 => s_distancia1,
+		distancia0 => s_distancia0,
 		saida_serial => saida_serial,
 		pronto => s_pronto_transmissao,
 		dado_recebido_rx => s_dado_recebido_rx,
@@ -259,6 +266,7 @@ BEGIN
 
 	ALERTA : alerta_proximidade PORT MAP(
 		s_medida,
+		s_pronto_interface,
 		s_proximo
 	);
 
@@ -277,7 +285,7 @@ BEGIN
 
 	sinais00 <= s_angulo2 & s_angulo1 & s_angulo0 & s_distancia2 & s_distancia1 & s_distancia0;
 	sinais01 <= '0' & s_posicao & db_estado_interface & "0000" & "0000" & "0000" & "0000";
-	sinais10 <= s_db_estado_tx_sonar & '0' & s_db_estado_uc_sonar & '0' & s_db _contagem_mux_transmissao & s_db_dado_a_transmitir & "0000";
+	sinais10 <= s_db_estado_tx_sonar & '0' & s_db_estado_uc_sonar & '0' & s_db_contagem_mux_transmissao & s_db_dado_a_transmitir & "0000";
 	sinais11 <= s_db_estado_rx & s_dado_recebido_rx & s_db_estado_tx_sonar & s_db_dado_a_transmitir;
 
 END ARCHITECTURE;

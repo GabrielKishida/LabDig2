@@ -10,6 +10,8 @@ ENTITY tx_dados_sonar_fd IS
         zera : IN STD_LOGIC;
         conta : IN STD_LOGIC;
         enviar_palavra : IN STD_LOGIC;
+        entrada_serial : IN STD_LOGIC;
+        recebe_dado : IN STD_LOGIC;
         angulo2 : IN STD_LOGIC_VECTOR(3 DOWNTO 0); -- digitos BCD
         angulo1 : IN STD_LOGIC_VECTOR(3 DOWNTO 0); -- de angulo
         angulo0 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -98,13 +100,13 @@ BEGIN
 
     MULTIPLEXADOR : mux_8x1_n GENERIC MAP(
         BITS => 8) PORT MAP(
-        D0 => asc_angulo0,
+        D0 => asc_angulo2,
         D1 => asc_angulo1,
-        D2 => asc_angulo2,
+        D2 => asc_angulo0,
         D3 => "00101100", -- virgula
-        D4 => asc_distancia0,
+        D4 => asc_distancia2,
         D5 => asc_distancia1,
-        D6 => asc_distancia2,
+        D6 => asc_distancia0,
         D7 => "00101110", -- ponto
         SEL => s_contagem,
         MUX_OUT => s_dado_a_transmitir
@@ -115,7 +117,7 @@ BEGIN
         reset => reset,
         transmite_dado => enviar_palavra,
         dados_ascii => s_dado_a_transmitir,
-        dado_serial => '0',
+        dado_serial => entrada_serial,
         recebe_dado => '0',
         saida_serial => saida_serial,
         pronto_tx => pronto_tx,

@@ -15,7 +15,8 @@ ARCHITECTURE tb OF sonar_tb IS
             ligar : IN STD_LOGIC;
             echo : IN STD_LOGIC;
             selmux : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-            entrada_serial : OUT STD_LOGIC;
+            entrada_serial : IN STD_LOGIC;
+            recebe_dado : IN STD_LOGIC;
             pronto_tx_sonar : OUT STD_LOGIC;
             saida_serial : OUT STD_LOGIC;
             pwm : OUT STD_LOGIC;
@@ -27,8 +28,7 @@ ARCHITECTURE tb OF sonar_tb IS
             hex3 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
             hex4 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
             hex5 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
-
-            db_dado_recebido : OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+            db_dado_recebido : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
             db_pwm : OUT STD_LOGIC;
             db_saida_serial : OUT STD_LOGIC
 
@@ -63,15 +63,15 @@ ARCHITECTURE tb OF sonar_tb IS
     SIGNAL reset_in : STD_LOGIC := '0';
     SIGNAL ligar_in : STD_LOGIC := '0';
     SIGNAL echo_in : STD_LOGIC := '0';
-    SIGNAL selmux_in : STD_LOGIC_VECTOR(1 DOWNTO 0) := "00";
+    SIGNAL entrada_serial_in : STD_LOGIC := '1';
+    SIGNAL recebe_dado_in : STD_LOGIC := '0';
+    SIGNAL selmux_in : STD_LOGIC_VECTOR(1 DOWNTO 0) := "01";
     SIGNAL pronto_tx_sonar_out : STD_LOGIC;
     SIGNAL saida_serial_out : STD_LOGIC;
     SIGNAL pwm_out : STD_LOGIC;
     SIGNAL proximidade_out : STD_LOGIC;
     SIGNAL hex0_out, hex1_out, hex2_out, hex3_out, hex4_out, hex5_out : STD_LOGIC_VECTOR(6 DOWNTO 0);
     SIGNAL trigger_out : STD_LOGIC := '0';
-    SIGNAL medida_out : STD_LOGIC_VECTOR (11 DOWNTO 0) := "000000000000";
-    SIGNAL db_estado_out : STD_LOGIC_VECTOR (3 DOWNTO 0) := "0000";
 
     SIGNAL s_tem_dado : STD_LOGIC;
     SIGNAL s_dado_recebido : STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -79,6 +79,7 @@ ARCHITECTURE tb OF sonar_tb IS
     -- Configurações do clock
     SIGNAL keep_simulating : STD_LOGIC := '0'; -- delimita o tempo de geração do clock
     CONSTANT clockPeriod : TIME := 20 ns; -- clock de 50MHz
+    CONSTANT one_cm_time : TIME := 2950 * clockPeriod;
 
 BEGIN
     -- Gerador de clock: executa enquanto 'keep_simulating = 1', com o período
@@ -93,6 +94,8 @@ BEGIN
         ligar => ligar_in,
         echo => echo_in,
         selmux => selmux_in,
+        entrada_serial => entrada_serial_in,
+        recebe_dado => recebe_dado_in,
         pronto_tx_sonar => pronto_tx_sonar_out,
         saida_serial => saida_serial_out,
         pwm => pwm_out,
@@ -148,56 +151,56 @@ BEGIN
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 12000 * clockPeriod; -- Distância de 4 cm
+        WAIT FOR one_cm_time * 10; -- Distância de 10 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 44115 * clockPeriod; -- Distância de 15 cm
+        WAIT FOR one_cm_time * 20; -- Distância de 20 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 294100 * clockPeriod; -- Distância de 1 m ou 100 cm
+        WAIT FOR one_cm_time * 25; -- Distância de 25 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 44115 * clockPeriod; -- Distância de 15 cm
+        WAIT FOR one_cm_time * 121; -- Distância de 121 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 12000 * clockPeriod; -- Distância de 4 cm
+        WAIT FOR one_cm_time * 87; -- Distância de 87 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 294100 * clockPeriod; -- Distância de 1 m ou 100 cm
+        WAIT FOR one_cm_time * 132; -- Distância de 219 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 12000 * clockPeriod; -- Distância de 4 cm
+        WAIT FOR one_cm_time * 18; -- Distância de 37 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 44115 * clockPeriod; -- Distância de 15 cm
+        WAIT FOR one_cm_time * 21; -- Distância de 21 cm
         echo_in <= '0';
 
         WAIT FOR 10000 * clockPeriod;

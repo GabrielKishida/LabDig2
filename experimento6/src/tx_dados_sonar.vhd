@@ -7,6 +7,8 @@ ENTITY tx_dados_sonar IS
         clock : IN STD_LOGIC;
         reset : IN STD_LOGIC;
         transmitir : IN STD_LOGIC;
+        entrada_serial : IN STD_LOGIC;
+        recebe_dado : IN STD_LOGIC;
         angulo2 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
         angulo1 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
         angulo0 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -38,6 +40,8 @@ ARCHITECTURE tx_dados_sonar_arch OF tx_dados_sonar IS
             zera : IN STD_LOGIC;
             conta : IN STD_LOGIC;
             enviar_palavra : IN STD_LOGIC;
+            entrada_serial : IN STD_LOGIC;
+            recebe_dado : IN STD_LOGIC;
             angulo2 : IN STD_LOGIC_VECTOR(3 DOWNTO 0); -- digitos BCD
             angulo1 : IN STD_LOGIC_VECTOR(3 DOWNTO 0); -- de angulo
             angulo0 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -79,6 +83,8 @@ BEGIN
         zera => s_zera,
         conta => s_conta,
         enviar_palavra => s_enviar_palavra,
+        entrada_serial => entrada_serial,
+        recebe_dado => recebe_dado,
         angulo2 => angulo2,
         angulo1 => angulo1,
         angulo0 => angulo0,
