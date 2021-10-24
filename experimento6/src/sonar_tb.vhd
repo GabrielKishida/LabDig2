@@ -15,12 +15,23 @@ ARCHITECTURE tb OF sonar_tb IS
             ligar : IN STD_LOGIC;
             echo : IN STD_LOGIC;
             selmux : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+            entrada_serial : OUT STD_LOGIC;
             pronto_tx_sonar : OUT STD_LOGIC;
             saida_serial : OUT STD_LOGIC;
             pwm : OUT STD_LOGIC;
             trigger : OUT STD_LOGIC;
             proximidade : OUT STD_LOGIC;
-            depuracao : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+            hex0 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+            hex1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+            hex2 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+            hex3 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+            hex4 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+            hex5 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+
+            db_dado_recebido : OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+            db_pwm : OUT STD_LOGIC;
+            db_saida_serial : OUT STD_LOGIC
+
         );
     END COMPONENT;
 
@@ -57,7 +68,7 @@ ARCHITECTURE tb OF sonar_tb IS
     SIGNAL saida_serial_out : STD_LOGIC;
     SIGNAL pwm_out : STD_LOGIC;
     SIGNAL proximidade_out : STD_LOGIC;
-    SIGNAL depuracao_out : STD_LOGIC_VECTOR(23 DOWNTO 0);
+    SIGNAL hex0_out, hex1_out, hex2_out, hex3_out, hex4_out, hex5_out : STD_LOGIC_VECTOR(6 DOWNTO 0);
     SIGNAL trigger_out : STD_LOGIC := '0';
     SIGNAL medida_out : STD_LOGIC_VECTOR (11 DOWNTO 0) := "000000000000";
     SIGNAL db_estado_out : STD_LOGIC_VECTOR (3 DOWNTO 0) := "0000";
@@ -87,7 +98,12 @@ BEGIN
         pwm => pwm_out,
         trigger => trigger_out,
         proximidade => proximidade_out,
-        depuracao => depuracao_out
+        hex0 => hex0_out,
+        hex1 => hex1_out,
+        hex2 => hex2_out,
+        hex3 => hex3_out,
+        hex4 => hex4_out,
+        hex5 => hex5_out
     );
 
     uart : uart_8n2 PORT MAP(
@@ -125,7 +141,6 @@ BEGIN
         WAIT UNTIL falling_edge(clock_in);
         WAIT FOR 50 * clockPeriod;
 
-        ---- caso de teste #1
         ligar_in <= '1';
 
         ---- acionamento da partida (inicio da transmissao)
@@ -133,57 +148,61 @@ BEGIN
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 12000 * clockPeriod;
+        WAIT FOR 12000 * clockPeriod; -- Distância de 4 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 148000 * clockPeriod;
+        WAIT FOR 44115 * clockPeriod; -- Distância de 15 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 945000 * clockPeriod;
+        WAIT FOR 294100 * clockPeriod; -- Distância de 1 m ou 100 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 148000 * clockPeriod;
+        WAIT FOR 44115 * clockPeriod; -- Distância de 15 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 12000 * clockPeriod;
+        WAIT FOR 12000 * clockPeriod; -- Distância de 4 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 148000 * clockPeriod;
+        WAIT FOR 294100 * clockPeriod; -- Distância de 1 m ou 100 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 12000 * clockPeriod;
+        WAIT FOR 12000 * clockPeriod; -- Distância de 4 cm
         echo_in <= '0';
 
         WAIT UNTIL trigger_out = '1';
         WAIT FOR 10000 * clockPeriod;
         echo_in <= '1';
         WAIT UNTIL rising_edge(clock_in);
-        WAIT FOR 945000 * clockPeriod;
+        WAIT FOR 44115 * clockPeriod; -- Distância de 15 cm
         echo_in <= '0';
+
+        WAIT FOR 10000 * clockPeriod;
+        WAIT UNTIL pronto_tx_sonar_out = '1';
+        WAIT FOR 10000 * clockPeriod;
 
         ---- final dos casos de teste da simulacao
         ASSERT false REPORT "Fim da simulacao" SEVERITY note;

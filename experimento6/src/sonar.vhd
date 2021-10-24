@@ -15,7 +15,15 @@ ENTITY sonar IS
 		pwm : OUT STD_LOGIC;
 		trigger : OUT STD_LOGIC;
 		proximidade : OUT STD_LOGIC;
-		depuracao : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+		hex0 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+		hex1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+		hex2 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+		hex3 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+		hex4 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+		hex5 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+		db_dado_recebido : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+		db_pwm : OUT STD_LOGIC;
+		db_saida_serial : OUT STD_LOGIC
 	);
 END ENTITY;
 
@@ -34,11 +42,15 @@ ARCHITECTURE sonar_arch OF sonar IS
 			distancia0 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 			saida_serial : OUT STD_LOGIC;
 			pronto : OUT STD_LOGIC;
+			dado_recebido_rx : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
 			db_transmitir : OUT STD_LOGIC;
 			db_transmite_dado : OUT STD_LOGIC;
 			db_saida_serial : OUT STD_LOGIC;
 			db_estado_tx : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-			db_estado_uc : OUT STD_LOGIC_VECTOR (2 DOWNTO 0)
+			db_estado_rx : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+			db_estado_uc : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
+			db_contagem_mux_transmissao : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+			db_dado_a_transmitir : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
 		);
 	END COMPONENT;
 
@@ -108,6 +120,13 @@ ARCHITECTURE sonar_arch OF sonar IS
 		);
 	END COMPONENT;
 
+	COMPONENT hexa7seg IS
+		PORT (
+			hexa : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+			sseg : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
+		);
+	END COMPONENT;
+
 	SIGNAL s_angulo0 : STD_LOGIC_VECTOR(3 DOWNTO 0);
 	SIGNAL s_angulo1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
 	SIGNAL s_angulo2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -127,28 +146,38 @@ ARCHITECTURE sonar_arch OF sonar IS
 	SIGNAL s_depuracao : STD_LOGIC_VECTOR(23 DOWNTO 0);
 	SIGNAL db_estado_interface : STD_LOGIC_VECTOR(3 DOWNTO 0);
 	SIGNAL s_db_estado_tx_sonar : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	SIGNAL s_db_estado_uc_sonar : STD_LOGIC_VECTOR(2 DOWNTO 0);
 	SIGNAL s_tick : STD_LOGIC;
+	SIGNAL s_db_contagem_mux_transmissao : STD_LOGIC_VECTOR (2 DOWNTO 0);
+	SIGNAL s_db_dado_a_transmitir : STD_LOGIC_VECTOR (7 DOWNTO 0);
+	SIGNAL s_db_estado_rx : STD_LOGIC_VECTOR (3 DOWNTO 0);
+	SIGNAL s_dado_recebido_rx : STD_LOGIC_VECTOR(7 DOWNTO 0);
+
 BEGIN
 
 	-- sinais reset e partida mapeados na GPIO (ativos em alto)
 
 	TRANSMISSAO : tx_dados_sonar PORT MAP(
-		clock,
-		reset,
-		s_transmitir,
-		s_angulo0,
-		s_angulo1,
-		s_angulo2,
-		s_distancia0,
-		s_distancia1,
-		s_distancia2,
-		saida_serial,
-		s_pronto_transmissao,
-		OPEN,
-		OPEN,
-		OPEN,
-		s_db_estado_tx_sonar,
-		OPEN
+		clock => clock,
+		reset => reset,
+		transmitir => s_transmitir,
+		angulo2 => s_angulo2,
+		angulo1 => s_angulo1,
+		angulo0 => s_angulo0,
+		distancia2 => s_angulo2,
+		distancia1 => s_angulo1,
+		distancia0 => s_angulo0,
+		saida_serial => saida_serial,
+		pronto => s_pronto_transmissao,
+		dado_recebido_rx => s_dado_recebido_rx,
+		db_transmitir => OPEN,
+		db_transmite_dado => OPEN,
+		db_saida_serial => db_saida_serial,
+		db_estado_tx => s_db_estado_tx_sonar,
+		db_estado_uc => s_db_estado_uc_sonar,
+		db_contagem_mux_transmissao => s_db_contagem_mux_transmissao,
+		db_dado_a_transmitir => s_db_dado_a_transmitir,
+		db_estado_rx => s_db_estado_rx
 	);
 
 	CONTROLE_SERVO : controle_sweep PORT MAP(
@@ -159,7 +188,7 @@ BEGIN
 		s_posicao,
 		OPEN,
 		pwm,
-		OPEN
+		db_pwm
 	);
 
 	INTERFACE : interface_hcsr04 PORT MAP(
@@ -184,6 +213,37 @@ BEGIN
 		selmux,
 		s_depuracao
 	);
+
+	C_HEX0 : hexa7seg PORT MAP(
+		hexa => s_depuracao (3 DOWNTO 0),
+		sseg => hex0
+	);
+
+	C_HEX1 : hexa7seg PORT MAP(
+		hexa => s_depuracao (7 DOWNTO 4),
+		sseg => hex1
+	);
+
+	C_HEX2 : hexa7seg PORT MAP(
+		hexa => s_depuracao (11 DOWNTO 8),
+		sseg => hex2
+	);
+
+	C_HEX3 : hexa7seg PORT MAP(
+		hexa => s_depuracao (15 DOWNTO 12),
+		sseg => hex3
+	);
+
+	C_HEX4 : hexa7seg PORT MAP(
+		hexa => s_depuracao (19 DOWNTO 16),
+		sseg => hex4
+	);
+
+	C_HEX5 : hexa7seg PORT MAP(
+		hexa => s_depuracao (23 DOWNTO 20),
+		sseg => hex5
+	);
+
 	ED : edge_detector PORT MAP(
 		clk => clock,
 		signal_in => s_pronto_interface,
@@ -207,11 +267,17 @@ BEGIN
 	s_distancia1 <= s_medida(7 DOWNTO 4);
 	s_distancia0 <= s_medida(3 DOWNTO 0);
 	pronto_tx_sonar <= s_pronto_transmissao;
-	depuracao <= s_depuracao;
 
-	sinais00 <= s_posicao & db_estado_interface & "00000" & s_distancia2 & s_distancia1 & s_distancia2;
-	sinais01 <= "0000" & "0000" & "0000" & "0000" & "0000" & "0000";
-	sinais10 <= s_db_estado_tx_sonar & "0000" & "0000" & "0000" & "0000" & "0000";
-	sinais11 <= "0000" & "0000" & "0000" & s_angulo2 & s_angulo1 & s_angulo0;
+	db_dado_recebido <= s_dado_recebido_rx;
+
+	-- Sinais 00 -> Angulação + Distância
+	-- Sinais 01 -> Posicionamento + estado interface hcsr04
+	-- Sinais 10 -> TX_dados_sonar
+	-- Sinais 11 -> Saídas da UART
+
+	sinais00 <= s_angulo2 & s_angulo1 & s_angulo0 & s_distancia2 & s_distancia1 & s_distancia0;
+	sinais01 <= '0' & s_posicao & db_estado_interface & "0000" & "0000" & "0000" & "0000";
+	sinais10 <= s_db_estado_tx_sonar & '0' & s_db_estado_uc_sonar & '0' & s_db _contagem_mux_transmissao & s_db_dado_a_transmitir & "0000";
+	sinais11 <= s_db_estado_rx & s_dado_recebido_rx & s_db_estado_tx_sonar & s_db_dado_a_transmitir;
 
 END ARCHITECTURE;

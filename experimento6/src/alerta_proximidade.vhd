@@ -1,27 +1,30 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-entity alerta_proximidade is
-    port ( 
-        medida : in STD_LOGIC_VECTOR(11 DOWNTO 0);
-        proximo: out std_logic
-    );
-end entity;
+ENTITY alerta_proximidade IS
+	PORT (
+		medida : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+		proximo : OUT STD_LOGIC
+	);
+END ENTITY;
 
-architecture behav of alerta_proximidade is
-begin
-    process(medida)
-	begin
-		if (medida(11 downto 8) = "0000" and 
-			medida(7 downto 4) = "0001") then
+ARCHITECTURE behav OF alerta_proximidade IS
+BEGIN
+	PROCESS (medida)
+	BEGIN
+		IF (medida(11 DOWNTO 8) = "0000" AND
+			medida(7 DOWNTO 4) = "0001") THEN
 			proximo <= '1';
-		elsif (medida(11 downto 8) = "0000" and 
-				medida(7 downto 4) = "0010" and
-				medida(3 downto 0) = "0000") then
+		ELSIF (medida(11 DOWNTO 8) = "0000" AND
+			medida(7 DOWNTO 4) = "0010" AND
+			medida(3 DOWNTO 0) = "0000") THEN
 			proximo <= '1';
-		else 
+		ELSIF (medida(11 DOWNTO 8) = "0000" AND
+			medida(7 DOWNTO 4) = "0000" THEN
+			proximo <= '1';
+		ELSE
 			proximo <= '0';
-		end if;
-	end process;
+		END IF;
+	END PROCESS;
 
-end behav;
+END behav;

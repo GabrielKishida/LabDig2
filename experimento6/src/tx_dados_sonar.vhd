@@ -15,11 +15,15 @@ ENTITY tx_dados_sonar IS
         distancia0 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
         saida_serial : OUT STD_LOGIC;
         pronto : OUT STD_LOGIC;
+        dado_recebido_rx : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
         db_transmitir : OUT STD_LOGIC;
         db_transmite_dado : OUT STD_LOGIC;
         db_saida_serial : OUT STD_LOGIC;
         db_estado_tx : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-        db_estado_uc : OUT STD_LOGIC_VECTOR (2 DOWNTO 0)
+        db_estado_rx : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+        db_estado_uc : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
+        db_contagem_mux_transmissao : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+        db_dado_a_transmitir : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
     );
 END ENTITY;
 
@@ -43,10 +47,13 @@ ARCHITECTURE tx_dados_sonar_arch OF tx_dados_sonar IS
             fim_contagem : OUT STD_LOGIC;
             saida_serial : OUT STD_LOGIC;
             pronto_tx : OUT STD_LOGIC;
+            dado_recebido_rx : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
             db_transmite_dado : OUT STD_LOGIC;
             db_saida_serial : OUT STD_LOGIC;
-            db_estado_tx : OUT STD_LOGIC_VECTOR (3 DOWNTO 0)
-
+            db_estado_tx : OUT STD_LOGIC_VECTOR (3 DOWNTO 0);
+            db_estado_rx : OUT STD_LOGIC_VECTOR (3 DOWNTO 0);
+            db_contagem_mux_transmissao : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+            db_dado_a_transmitir : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
         );
     END COMPONENT;
 
@@ -83,8 +90,14 @@ BEGIN
         pronto_tx => s_fim_tx,
         db_transmite_dado => db_transmite_dado,
         db_saida_serial => db_saida_serial,
-        db_estado_tx => db_estado_tx
+        db_estado_tx => db_estado_tx,
+        db_contagem_mux_transmissao => db_contagem_mux_transmissao,
+        db_dado_a_transmitir => db_dado_a_transmitir,
+        db_estado_rx => db_estado_rx,
+        dado_recebido_rx => dado_recebido_rx
+
     );
+
     UC : tx_dados_sonar_uc PORT MAP(
         clock => clock,
         reset => reset,
